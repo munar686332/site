@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBZ Software & Technologies | Next-Gen Tech & Hardware Solutions</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #121216;
+            --bg-card: rgba(22, 22, 28, 0.7);
+            --accent-red: #FF0000;
+            --accent-red-glow: rgba(255, 0, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(255, 0, 0, 0.3);
+            --font-heading: 'Orbitron', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay for Cyberpunk/Gaming Vibe */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 999;
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Typography Defaults */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title-wrapper {
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(10, 10, 12, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-sub);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-red);
+            transition: var(--transition);
+            box-shadow: 0 0 8px var(--accent-red);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.08) 0%, rgba(10, 10, 12, 1) 70%);
+            overflow: hidden;
+        }
+
+        /* Background Animated Grid */
+        .hero-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: rotateX(60deg) translateY(0); }
+            100% { transform: rotateX(60deg) translateY(50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            font-family: var(--font-sub);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 30%, #a0a0ab 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Custom Button Styling */
+        .btn {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 16px 32px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: #fff;
+            border: 1px solid var(--accent-red);
+            box-shadow: 0 0 20px var(--accent-red-glow);
+        }
+
+        .btn-primary:hover {
+            background: #cc0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Main Section Container */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--border-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.15);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Stats / Highlights Section */
+        .stats-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            color: var(--accent-red);
+            font-family: var(--font-heading);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        .stat-card p {
+            font-family: var(--font-sub);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Products Showcase (Hardware & 3D Printers) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+        }
+
+        .product-img-holder {
+            width: 100%;
+            height: 200px;
+            background: #1a1a22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .product-card:hover .product-img-holder {
+            color: var(--accent-red);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-red);
+            color: white;
+            font-size: 0.75rem;
+            font-family: var(--font-heading);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-family: var(--font-sub);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* About & Tech Stack */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: var(--font-sub);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-family: var(--font-sub);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            background: rgba(10, 10, 12, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            border-radius: 4px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: #050507;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 5% 20px 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 10, 12, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Glassmorphic Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fa-solid fa-microchip"></i> MBZ <span>TECH</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#store">Hardware & 3D</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Next-Gen Tech Architecture</span>
+            <h1>Hardware, AI & Custom Software Engineering</h1>
+            <p>MBZ Software & Technologies bridges the gap between physical innovation and digital intelligence. From enterprise AI integration and custom Web/Windows apps to professional 3D printing and hardware deployment.</p>
+            <div class="hero-cta">
+                <a href="#services" class="btn btn-primary"><i class="fa-solid fa-terminal"></i> Explore Services</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-headset"></i> Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Highlight Section -->
+    <section class="stats-section">
+        <div class="stat-card">
+            <h3>99.9%</h3>
+            <p>System Uptime</p>
+        </div>
+        <div class="stat-card">
+            <h3>500+</h3>
+            <p>3D Builds Delivered</p>
+        </div>
+        <div class="stat-card">
+            <h3>150+</h3>
+            <p>Enterprise Clients</p>
+        </div>
+        <div class="stat-card">
+            <h3>24/7</h3>
+            <p>Technical Support</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-title-wrapper">
+            <h2>Core Services</h2>
+        </div>
+        <div class="services-grid">
+
+            <!-- Windows Services -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-brands fa-windows service-icon"></i>
+                    <h3>Windows Systems & Services</h3>
+                    <p>Custom Windows background services, system optimization, background automation, and native desktop software tailored for heavy enterprise operations.</p>
+                </div>
+            </div>
+
+            <!-- AI Services -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-solid fa-brain service-icon"></i>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Deploying intelligent LLM integrations, computer vision systems, predictive data modeling, and custom AI agents to automate business workflows.</p>
+                </div>
+            </div>
+
+            <!-- Excel Automation -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-solid fa-file-excel service-icon"></i>
+                    <h3>Advanced Excel & VBA</h3>
+                    <p>Complex spreadsheet architecture, macro/VBA script development, automated data parsing pipelines, and real-time dashboard visualization.</p>
+                </div>
+            </div>
+
+            <!-- Web Development -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-solid fa-code service-icon"></i>
+                    <h3>Custom Web Engineering</h3>
+                    <p>High-performance single-page web applications, modern responsive company portals, e-commerce infrastructure, and sleek UI/UX design.</p>
+                </div>
+            </div>
+
+            <!-- 3D Printing Services -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-solid fa-cube service-icon"></i>
+                    <h3>Precision 3D Printing</h3>
+                    <p>Rapid prototyping, industrial part fabrication using PLA, ABS, TPU, and Resin materials, standard engineering modeling, and custom 3D design rendering.</p>
+                </div>
+            </div>
+
+            <!-- Hardware & Software Sales -->
+            <div class="service-card">
+                <div>
+                    <i class="fa-solid fa-server service-icon"></i>
+                    <h3>Hardware & Software Supply</h3>
+                    <p>Authorized reseller of commercial PC hardware, enterprise networking servers, custom workstation rigs, software license management, and retail 3D printers.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Hardware & 3D Store Section -->
+    <section id="store" style="background: var(--bg-secondary);">
+        <div class="section-title-wrapper">
+            <h2>Equipment & Hardware Supply</h2>
+        </div>
+        <div class="products-grid">
+
+            <div class="product-card">
+                <div class="product-img-holder">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="product-badge">Best Seller</span>
+                </div>
+                <div class="product-info">
+                    <h3>Industrial FDM 3D Printer</h3>
+                    <span class="product-price">Commercial Grade</span>
+                    <p>High-speed, dual-extruder 3D printer suitable for carbon fiber, resin, and standard filaments.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-holder">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span class="product-badge">In Stock</span>
+                </div>
+                <div class="product-info">
+                    <h3>AI Processing Workstations</h3>
+                    <span class="product-price">Custom Build</span>
+                    <p>Pre-configured multi-GPU desktop systems explicitly tuned for local AI model inference & rendering.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-holder">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <span class="product-badge">Enterprise</span>
+                </div>
+                <div class="product-info">
+                    <h3>Windows Server Rigs</h3>
+                    <span class="product-price">Commercial</span>
+                    <p>Rack-mountable server hardware complete with official Windows Server licensing and setup.</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-holder">
+                    <i class="fa-solid fa-cubes"></i>
+                    <span class="product-badge">Filament</span>
+                </div>
+                <div class="product-info">
+                    <h3>Engineering Filaments</h3>
+                    <span class="product-price">Bulk Supply</span>
+                    <p>Premium PETG, PLA+, TPU, and Carbon Fiber filament spools for high-stress mechanical parts.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 style="text-align: left; display: block;">Who We Are</h2>
+                <p><strong>MBZ Software & Technologies</strong> operates at the intersection of computational engineering and physical hardware deployment. Founded with a vision to deliver robust tech infrastructures, we cater to small businesses, industrial operations, and enterprise environments.</p>
+                <p>Whether you require a background Windows system service to handle multi-threaded processing, an AI-driven data automation system, a custom modern web app, or industrial-grade 3D printed mechanical prototypes, our team provides full end-to-end execution.</p>
+                <div class="tech-tags">
+                    <span class="tag">Windows API</span>
+                    <span class="tag">Python AI</span>
+                    <span class="tag">VBA / Excel</span>
+                    <span class="tag">CAD Design</span>
+                    <span class="tag">FDM / SLA Printing</span>
+                    <span class="tag">Vanilla JS</span>
+                    <span class="tag">Server Hardware</span>
+                </div>
+            </div>
+            <div class="about-graphic" style="text-align: center; position: relative;">
+                <i class="fa-solid fa-shield-halved" style="font-size: 15rem; color: rgba(255, 0, 0, 0.1); text-shadow: 0 0 30px var(--accent-red-glow);"></i>
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800;">
+                    MBZ <span style="color: var(--accent-red);">TECH</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: var(--bg-secondary);">
+        <div class="section-title-wrapper">
+            <h2>Contact HQ</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Let's Build The Future</h3>
+                <p>Send us a message regarding software projects, 3D printing orders, or hardware procurement. Our technicians respond within 24 hours.</p>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Headquarters</h4>
+                        <p>Tech Industrial Zone, Suite 404</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p>contact@mbzsoftware.tech</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Direct Line</h4>
+                        <p>+1 (800) 555-MBZ-TECH</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name / Company</label>
+                    <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Needed</label>
+                    <select id="service" class="form-control" required>
+                        <option value="" disabled selected>Select a service...</option>
+                        <option value="windows">Windows Services & Software</option>
+                        <option value="ai">AI / Machine Learning Integration</option>
+                        <option value="excel">Excel Automation / VBA</option>
+                        <option value="web">Website Engineering</option>
+                        <option value="3d-print">3D Printing Service / Design</option>
+                        <option value="hardware">Hardware / 3D Printer Purchase</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Brief</label>
+                    <textarea id="message" class="form-control" placeholder="Describe your requirements or hardware specifications..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Request
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-microchip"></i> MBZ <span>TECH</span>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-icon" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 MBZ Software & Technologies. All Rights Reserved. Engineered for Performance.
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript -->
+    <script>
+        // DOM Elements
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navLinksList = document.querySelectorAll('.nav-links a');
+        const contactForm = document.getElementById('contactForm');
+
+        // Toggle Mobile Menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close Mobile Menu on Click
+        navLinksList.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Navbar Glassmorphism scroll enhancement
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 12, 0.95)';
+                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.8)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 12, 0.75)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Simple Form Submission Handler
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Transmitting...';
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                alert('Thank you! Your request has been transmitted to MBZ Software & Technologies HQ.');
+                contactForm.reset();
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
