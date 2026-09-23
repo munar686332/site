@@ -44,7 +44,6 @@
             flex-direction: column;
         }
 
-        /* Scanline Cyberpunk Overlay */
         body::before {
             content: "";
             display: block;
@@ -58,7 +57,6 @@
             opacity: 0.6;
         }
 
-        /* Typography Defaults */
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
             text-transform: uppercase;
@@ -99,7 +97,6 @@
             color: inherit;
         }
 
-        /* Glassmorphism Fixed Navbar */
         .navbar {
             position: fixed;
             top: 0;
@@ -179,7 +176,6 @@
             transition: var(--transition);
         }
 
-        /* Page Tab View Handling */
         .page-view {
             display: none;
             margin-top: 80px;
@@ -276,7 +272,6 @@
             flex-wrap: wrap;
         }
 
-        /* Buttons */
         .btn {
             font-family: var(--font-heading);
             font-size: 0.9rem;
@@ -319,7 +314,6 @@
             transform: translateY(-3px);
         }
 
-        /* Containers & Grids */
         section {
             padding: 80px 5%;
         }
@@ -329,44 +323,6 @@
             margin: 0 auto;
         }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
-            transition: var(--transition);
-            position: relative;
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.15);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--accent-red);
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px var(--accent-red-glow);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Stats Counter Bar */
         .stats-bar {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -393,7 +349,204 @@
             text-transform: uppercase;
         }
 
-        /* 3D Modeling Section & Custom Form */
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.15);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        /* Products Showcase Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+        }
+
+        .product-img-holder {
+            width: 100%;
+            height: 180px;
+            background: #181820;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .product-card:hover .product-img-holder {
+            color: var(--accent-red);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-red);
+            color: white;
+            font-size: 0.75rem;
+            font-family: var(--font-heading);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-family: var(--font-sub);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        /* About & Tech Stack */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: var(--font-sub);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Forms Layout */
         .form-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -444,7 +597,6 @@
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
 
-        /* 3D Showcase Filter & Gallery */
         .filter-bar {
             display: flex;
             justify-content: center;
@@ -525,7 +677,6 @@
             font-weight: 700;
         }
 
-        /* Estimate Box */
         .estimate-box {
             background: rgba(255, 0, 0, 0.05);
             border: 1px dashed var(--accent-red);
@@ -543,7 +694,6 @@
             color: var(--accent-red);
         }
 
-        /* Support Ticket Simulator Modal / Inline Box */
         .modal {
             display: none;
             position: fixed;
@@ -580,7 +730,6 @@
             color: var(--accent-red);
         }
 
-        /* Footer */
         footer {
             background: #050507;
             border-top: 1px solid var(--border-color);
@@ -630,17 +779,17 @@
             padding-top: 20px;
         }
 
-        /* Mobile & Tablet Styles */
-        @media (max-width: 868px) {
-            .hamburger {
-                display: block;
+        @media (max-width: 992px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
             }
+        }
 
+        @media (max-width: 868px) {
+            .hamburger { display: block; }
             .nav-links {
                 position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
+                top: 80px; left: -100%; width: 100%;
                 height: calc(100vh - 80px);
                 background: rgba(10, 10, 12, 0.98);
                 backdrop-filter: blur(20px);
@@ -650,27 +799,11 @@
                 gap: 2.5rem;
                 transition: var(--transition);
             }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-
+            .nav-links.active { left: 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
             .estimate-box {
                 flex-direction: column;
                 gap: 1rem;
@@ -681,28 +814,27 @@
 </head>
 <body>
 
-    <!-- Glassmorphism Navbar -->
     <nav class="navbar">
         <div class="logo" onclick="switchPage('home')">
             <i class="fa-solid fa-microchip"></i> MBZ <span>TECH</span>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a class="nav-btn active" onclick="switchPage('home')">1. Home</a></li>
-            <li><a class="nav-btn" onclick="switchPage('modeling')">2. 3D Modeling & Print</a></li>
-            <li><a class="nav-btn" onclick="switchPage('services')">3. IT & Windows Services</a></li>
+            <li><a class="nav-btn active" onclick="switchPage('home')"> Home</a></li>
+            <li><a class="nav-btn" onclick="switchPage('modeling')"> 3D Modeling & Print</a></li>
+            <li><a class="nav-btn" onclick="switchPage('services')"> IT & Windows Services</a></li>
         </ul>
         <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
 
-    <!-- PAGE 1: HOME LANDING PAGE -->
+    <!-- PAGE 1: HOME (CONSOLIDATED) -->
     <div id="page-home" class="page-view active-page">
         <!-- Hero Section -->
         <div class="hero">
             <div class="hero-grid"></div>
             <div class="hero-content">
-                <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Cyberpunk Engineering & Hardware Solutions</span>
+                <span class="hero-badge"><i class="fa-solid fa-bolt"></i>  Engineering & Hardware Solutions</span>
                 <h1>Software Architecture, AI & 3D Prototyping</h1>
                 <p>MBZ Software & Technologies provides specialized technical deployment. From native Windows background services and enterprise AI models to professional industrial 3D printing and PC hardware support.</p>
                 <div class="hero-cta">
@@ -712,63 +844,237 @@
             </div>
         </div>
 
-        <!-- Metric Counter Bar -->
+        <!-- Stats Highlight Section -->
         <div class="stats-bar">
             <div class="stat-item">
-                <h3>46+</h3>
-                <p>Custom Systems Deployed</p>
-            </div>
-            <div class="stat-item">
                 <h3>99.9%</h3>
-                <p>Windows Service Uptime</p>
+                <p>System Uptime</p>
             </div>
             <div class="stat-item">
                 <h3>500+</h3>
-                <p>3D Parts Printed</p>
+                <p>3D Builds Delivered</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Enterprise Clients</p>
             </div>
             <div class="stat-item">
                 <h3>24/7</h3>
-                <p>Tech Support Availability</p>
+                <p>Technical Support</p>
             </div>
         </div>
 
-        <!-- Feature Hub Cards -->
+        <!-- 1. Core Services Section -->
         <section class="container">
             <div class="section-title-wrapper">
-                <h2>Our Tech Divisions</h2>
+                <h2>Core Services</h2>
             </div>
-            <div class="grid-3">
-                <div class="card">
+            <div class="services-grid">
+                <div class="service-card">
                     <div>
-                        <i class="fa-solid fa-cubes card-icon"></i>
-                        <h3>3D Prototyping & Print</h3>
-                        <p>High-precision CAD modeling, functional engineering component fabrication using Rapid PLA+, TPU 95A, and Resin printing.</p>
+                        <i class="fa-brands fa-windows service-icon"></i>
+                        <h3>Windows Systems & Services</h3>
+                        <p>Custom Windows background services, system optimization, background automation, and native desktop software tailored for heavy enterprise operations.</p>
                     </div>
-                    <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="switchPage('modeling')">Open 3D Portal <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
 
-                <div class="card">
+                <div class="service-card">
                     <div>
-                        <i class="fa-brands fa-windows card-icon"></i>
-                        <h3>Windows OS & IT Support</h3>
-                        <p>Official OS installation, system optimization, background Windows services, desktop maintenance, and custom hardware builds.</p>
+                        <i class="fa-solid fa-brain service-icon"></i>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Deploying intelligent LLM integrations, computer vision systems, predictive data modeling, and custom AI agents to automate business workflows.</p>
                     </div>
-                    <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="switchPage('services')">Open IT Services <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
 
-                <div class="card">
+                <div class="service-card">
                     <div>
-                        <i class="fa-solid fa-brain card-icon"></i>
-                        <h3>AI & Excel Automation</h3>
-                        <p>Deploying custom LLM bots, enterprise machine learning scripts, automated Excel/VBA financial models, and web architecture.</p>
+                        <i class="fa-solid fa-file-excel service-icon"></i>
+                        <h3>Advanced Excel & VBA</h3>
+                        <p>Complex spreadsheet architecture, macro/VBA script development, automated data parsing pipelines, and real-time dashboard visualization.</p>
                     </div>
-                    <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="switchPage('services')">View Solutions <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-code service-icon"></i>
+                        <h3>Custom Web Engineering</h3>
+                        <p>High-performance single-page web applications, modern responsive company portals, e-commerce infrastructure, and sleek UI/UX design.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-cube service-icon"></i>
+                        <h3>Precision 3D Printing</h3>
+                        <p>Rapid prototyping, industrial part fabrication using PLA, ABS, TPU, and Resin materials, standard engineering modeling, and custom 3D design rendering.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-server service-icon"></i>
+                        <h3>Hardware & Software Supply</h3>
+                        <p>Authorized reseller of commercial PC hardware, enterprise networking servers, custom workstation rigs, software license management, and retail 3D printers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Equipment & Hardware Supply Section -->
+        <section style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2>Equipment & Hardware Supply</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-print"></i>
+                            <span class="product-badge">Best Seller</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Industrial FDM 3D Printer</h3>
+                            <span class="product-price">Commercial Grade</span>
+                            <p>High-speed, dual-extruder 3D printer suitable for carbon fiber, resin, and standard filaments.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span class="product-badge">In Stock</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>AI Processing Workstations</h3>
+                            <span class="product-price">Custom Build</span>
+                            <p>Pre-configured multi-GPU desktop systems explicitly tuned for local AI model inference & rendering.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <span class="product-badge">Enterprise</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Windows Server Rigs</h3>
+                            <span class="product-price">Commercial</span>
+                            <p>Rack-mountable server hardware complete with official Windows Server licensing and setup.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-cubes"></i>
+                            <span class="product-badge">Filament</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Engineering Filaments</h3>
+                            <span class="product-price">Bulk Supply</span>
+                            <p>Premium PETG, PLA+, TPU, and Carbon Fiber filament spools for high-stress mechanical parts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Who We Are Section -->
+        <section class="container">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 style="text-align: left; display: block;">Who We Are</h2>
+                    <p><strong>MBZ Software & Technologies</strong> operates at the intersection of computational engineering and physical hardware deployment. Founded with a vision to deliver robust tech infrastructures, we cater to small businesses, industrial operations, and enterprise environments.</p>
+                    <p>Whether you require a background Windows system service to handle multi-threaded processing, an AI-driven data automation system, a custom modern web app, or industrial-grade 3D printed mechanical prototypes, our team provides full end-to-end execution.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Windows API</span>
+                        <span class="tag">Python AI</span>
+                        <span class="tag">VBA / Excel</span>
+                        <span class="tag">CAD Design</span>
+                        <span class="tag">FDM / SLA Printing</span>
+                        <span class="tag">Vanilla JS</span>
+                        <span class="tag">Server Hardware</span>
+                    </div>
+                </div>
+                <div class="about-graphic" style="text-align: center; position: relative;">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 15rem; color: rgba(255, 0, 0, 0.1); text-shadow: 0 0 30px var(--accent-red-glow);"></i>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800;">
+                        MBZ <span style="color: var(--accent-red);">TECH</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Contact HQ Section -->
+        <section style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2>Contact HQ</h2>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Let's Build The Future</h3>
+                        <p>Send us a message regarding software projects, 3D printing orders, or hardware procurement. Our technicians respond within 24 hours.</p>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Headquarters</h4>
+                                <p>Doha, Bin Omran</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>muneebzz2002@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <h4>Direct Line</h4>
+                                <p>+974 55822034</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactHqForm">
+                        <div class="form-group">
+                            <label for="hqName">Full Name / Company</label>
+                            <input type="text" id="hqName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqEmail">Email Address</label>
+                            <input type="email" id="hqEmail" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqService">Service Needed</label>
+                            <select id="hqService" class="form-control" required>
+                                <option value="" disabled selected>Select a service...</option>
+                                <option value="Windows Services & Software">Windows Services & Software</option>
+                                <option value="AI / Machine Learning Integration">AI / Machine Learning Integration</option>
+                                <option value="Excel Automation / VBA">Excel Automation / VBA</option>
+                                <option value="Website Engineering">Website Engineering</option>
+                                <option value="3D Printing Service / Design">3D Printing Service / Design</option>
+                                <option value="Hardware / 3D Printer Purchase">Hardware / 3D Printer Purchase</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqMessage">Project Brief</label>
+                            <textarea id="hqMessage" class="form-control" style="min-height: 100px;" placeholder="Describe your requirements or hardware specifications..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; justify-content: center;">
+                            <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- PAGE 2: 3D MODELING & PRINTING PAGE -->
+    <!-- PAGE 2: 3D MODELING & PRINTING -->
     <div id="page-modeling" class="page-view">
         <section class="container">
             <div class="section-title-wrapper">
@@ -776,7 +1082,6 @@
                 <p>Upload specifications or order functional mechanical prototypes direct from our print lab.</p>
             </div>
 
-            <!-- Custom 3D Request Form -->
             <div class="form-container" style="margin-bottom: 80px;">
                 <h3 style="margin-bottom: 1.5rem; color: var(--accent-red);"><i class="fa-solid fa-sliders"></i> Interactive Print Order & Estimator</h3>
                 <form id="printForm" oninput="calculateEstimate()">
@@ -787,46 +1092,55 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Client Email Address</label>
+                            <input type="email" id="clientEmail3D" class="form-control" placeholder="client@domain.com" required>
+                        </div>
+
+                        <div class="form-group">
                             <label>Filament Material</label>
                             <select id="filamentType" class="form-control">
-                                <option value="10">Rapid PLA+ (Standard Prototype - $10/100g)</option>
-                                <option value="15">TPU 95A (Flexible Rubber - $15/100g)</option>
-                                <option value="20">PETG Carbon Fiber (High Strength - $20/100g)</option>
-                                <option value="25">High-Temp Resin (Precision Detail - $25/100g)</option>
+                                <option value="100">PLA (Standard Prototype - QAR 1/1g)</option>
+                                <option value="150">TPU (Flexible Rubber - QAR 1.50/1g)</option>
+                                <option value="150">PETG (High Strength - QAR 1.50/1g)</option>
+                                <option value="200">ABS/ASA (Precision Detail - QAR 2/1g)</option>
+                                <option value="200">Nylon (Extremely rugged, durable & stress-resistant - QAR 2/1g)</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Infill Density (%)</label>
-                            <input type="number" id="infill" class="form-control" value="20" min="10" max="100">
+                            <label>Print Density Preset</label>
+                            <select id="infillPreset" class="form-control">
+                                <option value="Standard Print">Standard Print (20% Infill - Light Use)</option>
+                                <option value="Medium Infill">Medium Infill (50% Infill - Durable Models)</option>
+                                <option value="Solid Print">Solid Print (100% Infill - Heavy Duty)</option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>Estimated Weight (Grams)</label>
-                            <input type="number" id="weight" class="form-control" value="150" min="10">
+                        <div class="form-group full-width">
+                            <label>Estimated Weight (Grams) Including Density</label>
+                            <input type="number" id="weight" class="form-control" value="100" min="10">
                         </div>
 
                         <div class="form-group full-width">
                             <label>CAD Specifications / Special Notes</label>
-                            <textarea id="notes" class="form-control" style="min-height: 80px;" placeholder="Specify key tolerances, threaded insert requirements, or layer height preferences (e.g. 0.16mm)..."></textarea>
+                            <textarea id="notes" class="form-control" style="min-height: 80px;" placeholder="Specify key tolerances, threaded insert requirements, or layer height preferences..."></textarea>
                         </div>
                     </div>
 
                     <div class="estimate-box">
                         <div>
                             <h4>Estimated Print Cost:</h4>
-                            <p>Includes material, machine time & quality inspection.</p>
+                            <p>Calculated strictly by weight and material rate.</p>
                         </div>
-                        <div class="estimate-price" id="totalEstimate">$25.00</div>
+                        <div class="estimate-price" id="totalEstimate">QAR 100.00</div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
-                        <i class="fa-solid fa-paper-plane"></i> Submit 3D Print Request
+                    <button type="submit" id="btn3DSubmit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
                     </button>
                 </form>
             </div>
 
-            <!-- Portfolio Showcase Grid -->
             <div class="section-title-wrapper">
                 <h2>Prototyping Showcase</h2>
             </div>
@@ -869,7 +1183,7 @@
         </section>
     </div>
 
-    <!-- PAGE 3: IT SERVICES & WINDOWS SOLUTIONS -->
+    <!-- PAGE 3: IT SERVICES -->
     <div id="page-services" class="page-view">
         <section class="container">
             <div class="section-title-wrapper">
@@ -877,51 +1191,50 @@
                 <p>Order software deployments, Windows OS servicing, and specialized tech help.</p>
             </div>
 
-            <div class="grid-3" style="margin-bottom: 60px;">
-                <div class="card">
+            <div class="services-grid" style="margin-bottom: 60px;">
+                <div class="service-card">
                     <div>
-                        <i class="fa-brands fa-windows card-icon"></i>
+                        <i class="fa-brands fa-windows service-icon"></i>
                         <h3>Windows OS Installation & Tuning</h3>
                         <p>Clean official Windows 10/11 Pro installations, driver updates, telemetry cleanup, and speed optimizations.</p>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Windows Installation & Tuning')">Order Service ($40)</button>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Windows Installation & Tuning')">Order Service (QAR 150)</button>
                 </div>
 
-                <div class="card">
+                <div class="service-card">
                     <div>
-                        <i class="fa-solid fa-headset card-icon"></i>
+                        <i class="fa-solid fa-headset service-icon"></i>
                         <h3>Remote Tech Support Ticket</h3>
                         <p>Direct remote desktop diagnosis for hardware glitches, software bugs, driver conflicts, and networking issue resolution.</p>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Remote Tech Support')">Book Session ($30/hr)</button>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Remote Tech Support')">Book Session (QAR 110/hr)</button>
                 </div>
 
-                <div class="card">
+                <div class="service-card">
                     <div>
-                        <i class="fa-solid fa-file-excel card-icon"></i>
+                        <i class="fa-solid fa-file-excel service-icon"></i>
                         <h3>Excel & VBA Macro Automation</h3>
                         <p>Custom automated Excel spreadsheets, financial dashboard generators, and Python data scraping routines.</p>
                     </div>
-                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Excel Automation Script')">Request Script ($60)</button>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="openOrderModal('Excel Automation Script')">Request Script (QAR 220)</button>
                 </div>
             </div>
 
-            <!-- Support Ticket Simulator Box -->
             <div class="form-container">
                 <h3 style="margin-bottom: 1.5rem; color: var(--accent-red);"><i class="fa-solid fa-ticket"></i> Submit Instant Service Ticket</h3>
                 <form id="ticketForm">
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Your Name</label>
-                            <input type="text" class="form-control" placeholder="e.g. Alex Mercer" required>
+                            <input type="text" id="ticketName" class="form-control" placeholder="e.g. Alex Mercer" required>
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="alex@domain.com" required>
+                            <input type="email" id="ticketEmail" class="form-control" placeholder="alex@domain.com" required>
                         </div>
                         <div class="form-group full-width">
                             <label>Service Category</label>
-                            <select class="form-control">
+                            <select id="ticketCategory" class="form-control">
                                 <option>Windows OS / Software Installation</option>
                                 <option>Computer Hardware Upgrade / Repair</option>
                                 <option>AI Integration Support</option>
@@ -930,11 +1243,11 @@
                         </div>
                         <div class="form-group full-width">
                             <label>Describe the Issue or Request</label>
-                            <textarea class="form-control" style="min-height: 100px;" placeholder="Provide PC specs or error message details..." required></textarea>
+                            <textarea id="ticketDetails" class="form-control" style="min-height: 100px;" placeholder="Provide PC specs or error message details..." required></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        <i class="fa-solid fa-paper-plane"></i> Submit Ticket to HQ
+                    <button type="submit" id="btnTicketSubmit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
                     </button>
                 </form>
             </div>
@@ -950,18 +1263,19 @@
             <form id="modalForm">
                 <div class="form-group">
                     <label>Your Email</label>
-                    <input type="email" class="form-control" required placeholder="client@company.com">
+                    <input type="email" id="modalEmail" class="form-control" required placeholder="client@company.com">
                 </div>
                 <div class="form-group">
                     <label>Preferred Date / Time</label>
-                    <input type="datetime-local" class="form-control" required>
+                    <input type="datetime-local" id="modalDateTime" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">Confirm Order</button>
+                <button type="submit" id="btnModalSubmit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">
+                    <i class="fa-brands fa-whatsapp"></i> Confirm via WhatsApp
+                </button>
             </form>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="logo" onclick="switchPage('home')">
@@ -978,33 +1292,27 @@
         </div>
     </footer>
 
-    <!-- Client-Side Routing and Logic JavaScript -->
     <script>
-        // Single Page Application Navigation Router
+        const PHONE_NUMBER = "97433887222";
+
         function switchPage(pageId) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page-view');
             pages.forEach(p => p.classList.remove('active-page'));
 
-            // Deactivate all nav buttons
             const navs = document.querySelectorAll('.nav-btn');
             navs.forEach(n => n.classList.remove('active'));
 
-            // Show selected page
             const targetPage = document.getElementById(`page-${pageId}`);
             if (targetPage) {
                 targetPage.classList.add('active-page');
             }
 
-            // Highlight corresponding navbar link
             if (pageId === 'home') navs[0].classList.add('active');
             if (pageId === 'modeling') navs[1].classList.add('active');
             if (pageId === 'services') navs[2].classList.add('active');
 
-            // Scroll back to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Close mobile menu if open
             const navLinks = document.getElementById('navLinks');
             const hamburgerIcon = document.querySelector('#hamburger i');
             navLinks.classList.remove('active');
@@ -1014,7 +1322,6 @@
             }
         }
 
-        // Mobile Hamburger Menu Handler
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
 
@@ -1030,21 +1337,16 @@
             }
         });
 
-        // 3D Estimator Calculation
         function calculateEstimate() {
-            const materialRate = parseFloat(document.getElementById('filamentType').value) || 10;
+            const materialRate = parseFloat(document.getElementById('filamentType').value) || 100;
             const weight = parseFloat(document.getElementById('weight').value) || 0;
-            const infill = parseFloat(document.getElementById('infill').value) || 20;
 
-            // Simple estimation formula
             const baseCost = (weight / 100) * materialRate;
-            const infillMultiplier = 1 + ((infill - 20) * 0.005);
-            const total = Math.max(15, baseCost * infillMultiplier);
+            const total = Math.max(0, baseCost);
 
-            document.getElementById('totalEstimate').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('totalEstimate').innerText = `QAR ${total.toFixed(2)}`;
         }
 
-        // Portfolio Category Filter
         function filterPortfolio(category) {
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(b => b.classList.remove('active'));
@@ -1060,8 +1362,9 @@
             });
         }
 
-        // Service Order Modal
+        let selectedServiceTitle = '';
         function openOrderModal(serviceName) {
+            selectedServiceTitle = serviceName;
             document.getElementById('modalServiceTitle').innerText = `Order: ${serviceName}`;
             document.getElementById('orderModal').style.display = 'flex';
         }
@@ -1070,23 +1373,86 @@
             document.getElementById('orderModal').style.display = 'none';
         }
 
-        // Form Handlers
+        // WhatsApp Submission Handlers
+
+        // 1. Home Page Contact HQ Form -> WhatsApp Redirect
+        document.getElementById('contactHqForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('hqName').value;
+            const email = document.getElementById('hqEmail').value;
+            const service = document.getElementById('hqService').value;
+            const messageText = document.getElementById('hqMessage').value;
+
+            const message = `Project Request via HQ Portal
+Client Name / Company : ${name}
+Email : ${email}
+Service Needed : ${service}
+Project Brief : ${messageText}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // 2. 3D Print Request Form -> WhatsApp Redirect
         document.getElementById('printForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Your 3D Printing order request has been submitted to MBZ Print Labs! Check your email shortly.');
-            document.getElementById('printForm').reset();
-            calculateEstimate();
+
+            const title = document.getElementById('modelTitle').value;
+            const email = document.getElementById('clientEmail3D').value;
+            const rawFilament = document.getElementById('filamentType').options[document.getElementById('filamentType').selectedIndex].text;
+            const filament = rawFilament.split('(')[0].trim();
+            const density = document.getElementById('infillPreset').options[document.getElementById('infillPreset').selectedIndex].text;
+            const weight = document.getElementById('weight').value;
+            const notes = document.getElementById('notes').value || "None";
+            const estimate = document.getElementById('totalEstimate').innerText;
+
+            const message = `I want a 3d model printed
+Model name : ${title}
+Email : ${email}
+Filament : ${filament}
+Density : ${density}
+Estimated weight : ${weight} Gram
+Special Note : ${notes}
+Estimated Cost : ${estimate}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
 
+        // 3. IT Support Ticket -> WhatsApp Redirect
         document.getElementById('ticketForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Service Ticket created successfully! An MBZ technician will reach out via email.');
-            document.getElementById('ticketForm').reset();
+
+            const name = document.getElementById('ticketName').value;
+            const email = document.getElementById('ticketEmail').value;
+            const category = document.getElementById('ticketCategory').value;
+            const details = document.getElementById('ticketDetails').value;
+
+            const message = `IT Support Ticket
+Client Name : ${name}
+Email : ${email}
+Category : ${category}
+Details : ${details}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
 
+        // 4. Modal Order Form -> WhatsApp Redirect
         document.getElementById('modalForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Order confirmed! We have dispatched details to your email.');
+
+            const email = document.getElementById('modalEmail').value;
+            const dateTime = document.getElementById('modalDateTime').value;
+
+            const message = `Service Order Booking
+Service : ${selectedServiceTitle}
+Client Email : ${email}
+Preferred Time : ${dateTime}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
             closeOrderModal();
         });
     </script>
