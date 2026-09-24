@@ -1477,14 +1477,51 @@
                 </button>
             </div>
 
-            <div class="gallery-grid" id="galleryGrid"></div>
-            <div class="gallery-empty" id="galleryEmpty">
-                <i class="fa-solid fa-images"></i>
-                <h3>Gallery Is Empty</h3>
-                <p>Uploaded project images will appear here.</p>
-            </div>
-        </section>
+<!-- Gallery Grid -->
+<div class="gallery-grid" id="galleryGrid">
+    <!-- Image Item 1 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/ac2c7261-bbe2-420e-86e1-1c3cb62e888c/images/13094786_ca4bfdf0-f238-4733-8f08-5c67303c8db3_8dd86129-282d-4ca4-8d9c-3f7b24211dd9/cover-verti-2-horizon.gif" alt="3D Printed Prototype">
+        <div class="gallery-caption">3D Printed Controller Stand — PLA</div>
     </div>
+
+    <!-- Image Item 2 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/f592fee3-4a47-4f30-8e2f-b296efdcde67/images/13785535_a1cb9413-cdf7-436e-81b5-929e3eea56e0_390c0716-048e-4287-82db-b33f3049f308/thumbs/inside/1280x960/jpg/a7306217_hd.webp" alt="Gimbal Mechanism">
+        <div class="gallery-caption">3D Printed Laptop Stand</div>
+    </div>
+
+    <!-- Image Item 3 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/ecdf0441-a119-4c0d-9d5e-553e50b86c87/images/13635195_b9bbe072-ef38-41fa-a757-081925cbd72f_af412d24-757c-475f-b8b1-059a6b83cebc/thumbs/inside/1280x960/jpeg/img_6323.webp" alt="Planetary Gear">
+        <div class="gallery-caption">3D Printed Black Hole Lamp</div>
+    </div>
+
+    <!-- Image Item 4 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/550127/images/4609351_7bc7d6e9-85de-4e1d-b8bf-bf3acb28b14e/thumbs/inside/1280x960/jpg/dscn4523.webp" alt="Planetary Gear">
+        <div class="gallery-caption">3D Printed Gear Fidget</div>
+    </div>
+
+    <!-- Image Item 5 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/e400d247-598d-4255-9ea6-86318f0a3975/images/10768484_f796fd26-7e13-4a98-88cc-b41894491577_15323d7f-09d7-4964-a4a1-c1003c49b6bb/gears-v34s2.gif">
+        <div class="gallery-caption">3D Modeled Educational Gear Examples</div>
+    </div>
+
+    <!-- Image Item 6 -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://media.printables.com/media/prints/666bceb1-a575-4c45-8ad9-5ec02c9f1a36/images/11597645_a7221013-d9fa-4149-9168-aa8a9ab811a7_5cfc81ae-7809-4839-800e-5b6a986f2a0e/thumbs/inside/1920x1440/png/designer.webp">
+        <div class="gallery-caption">3D Printed Gears For Kids</div>
+    </div>
+</div>
+
+<!-- Lightbox Modal (Add this right before </body>) -->
+<div id="lightboxModal" class="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightboxImg" alt="Enlarged view">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+</div>
 
     <!-- Admin Upload Modal -->
     <div class="modal" id="adminModal">
