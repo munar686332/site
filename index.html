@@ -799,6 +799,23 @@
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
         }
 
+        .gallery-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 0, 0, 0.85);
+            color: #fff;
+            font-family: var(--font-sub);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
         .gallery-caption {
             position: absolute;
             left: 0; right: 0; bottom: 0;
@@ -1482,36 +1499,7 @@
 
             <!-- Gallery Grid -->
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Preloaded Static Items -->
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/ac2c7261-bbe2-420e-86e1-1c3cb62e888c/images/13094786_ca4bfdf0-f238-4733-8f08-5c67303c8db3_8dd86129-282d-4ca4-8d9c-3f7b24211dd9/cover-verti-2-horizon.gif" alt="3D Printed Prototype">
-                    <div class="gallery-caption">3D Printed Controller Stand — PLA</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/f592fee3-4a47-4f30-8e2f-b296efdcde67/images/13785535_a1cb9413-cdf7-436e-81b5-929e3eea56e0_390c0716-048e-4287-82db-b33f3049f308/thumbs/inside/1280x960/jpg/a7306217_hd.webp" alt="Gimbal Mechanism">
-                    <div class="gallery-caption">3D Printed Laptop Stand</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/ecdf0441-a119-4c0d-9d5e-553e50b86c87/images/13635195_b9bbe072-ef38-41fa-a757-081925cbd72f_af412d24-757c-475f-b8b1-059a6b83cebc/thumbs/inside/1280x960/jpeg/img_6323.webp" alt="Planetary Gear">
-                    <div class="gallery-caption">3D Printed Black Hole Lamp</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/550127/images/4609351_7bc7d6e9-85de-4e1d-b8bf-bf3acb28b14e/thumbs/inside/1280x960/jpg/dscn4523.webp" alt="Planetary Gear">
-                    <div class="gallery-caption">3D Printed Gear Fidget</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/e400d247-598d-4255-9ea6-86318f0a3975/images/10768484_f796fd26-7e13-4a98-88cc-b41894491577_15323d7f-09d7-4964-a4a1-c1003c49b6bb/gears-v34s2.gif" alt="Educational Gear Examples">
-                    <div class="gallery-caption">3D Modeled Educational Gear Examples</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="https://media.printables.com/media/prints/666bceb1-a575-4c45-8ad9-5ec02c9f1a36/images/11597645_a7221013-d9fa-4149-9168-aa8a9ab811a7_5cfc81ae-7809-4839-800e-5b6a986f2a0e/thumbs/inside/1920x1440/png/designer.webp" alt="Gears For Kids">
-                    <div class="gallery-caption">3D Printed Gears For Kids</div>
-                </div>
+                <!-- Gallery Items are rendered via JS script below -->
             </div>
 
             <div class="gallery-empty" id="galleryEmpty" style="display: none;">
@@ -1764,15 +1752,67 @@ Preferred Time : ${dateTime}`;
         let galleryDeleteMode = false;
         let lightboxIndex = 0;
         let activeGalleryList = [];
+        let currentSubGallery = null; // Holds nested images when viewing a group in Lightbox
 
         const defaultGalleryItems = [
-            { src: "https://media.printables.com/media/prints/ac2c7261-bbe2-420e-86e1-1c3cb62e888c/images/13094786_ca4bfdf0-f238-4733-8f08-5c67303c8db3_8dd86129-282d-4ca4-8d9c-3f7b24211dd9/cover-verti-2-horizon.gif", caption: "3D Printed Controller Stand — PLA" },
-            { src: "https://media.printables.com/media/prints/f592fee3-4a47-4f30-8e2f-b296efdcde67/images/13785535_a1cb9413-cdf7-436e-81b5-929e3eea56e0_390c0716-048e-4287-82db-b33f3049f308/thumbs/inside/1280x960/jpg/a7306217_hd.webp", caption: "3D Printed Laptop Stand" },
-            { src: "https://media.printables.com/media/prints/ecdf0441-a119-4c0d-9d5e-553e50b86c87/images/13635195_b9bbe072-ef38-41fa-a757-081925cbd72f_af412d24-757c-475f-b8b1-059a6b83cebc/thumbs/inside/1280x960/jpeg/img_6323.webp", caption: "3D Printed Black Hole Lamp" },
-            { src: "https://media.printables.com/media/prints/550127/images/4609351_7bc7d6e9-85de-4e1d-b8bf-bf3acb28b14e/thumbs/inside/1280x960/jpg/dscn4523.webp", caption: "3D Printed Gear Fidget" },
-            { src: "https://media.printables.com/media/prints/e400d247-598d-4255-9ea6-86318f0a3975/images/10768484_f796fd26-7e13-4a98-88cc-b41894491577_15323d7f-09d7-4964-a4a1-c1003c49b6bb/gears-v34s2.gif", caption: "3D Modeled Educational Gear Examples" },
-            { src: "https://media.printables.com/media/prints/666bceb1-a575-4c45-8ad9-5ec02c9f1a36/images/11597645_a7221013-d9fa-4149-9168-aa8a9ab811a7_5cfc81ae-7809-4839-800e-5b6a986f2a0e/thumbs/inside/1920x1440/png/designer.webp", caption: "3D Printed Gears For Kids" },
-            { src: "https://media.printables.com/media/prints/1051622/images/7966913_e0f56a4a-246a-4e5c-b90d-9a5884ceeef0_7e7409f0-294a-4f45-9ca8-85949f6f9630/ring1.gif", caption: "3D Printed Helical Gear Fidget" }
+            { 
+                src: "https://media.printables.com/media/prints/ac2c7261-bbe2-420e-86e1-1c3cb62e888c/images/13094786_ca4bfdf0-f238-4733-8f08-5c67303c8db3_8dd86129-282d-4ca4-8d9c-3f7b24211dd9/cover-verti-2-horizon.gif", 
+                caption: "3D Printed Controller Stand — PLA",
+                images: [
+                    { src: "https://media.printables.com/media/prints/a86a5c6c-d99c-45e0-a126-c77e476e92ed/images/13094794_7c93b81c-7176-4013-943e-48549afb690e_35ae40ce-2d28-4fbf-a01a-183e6738de62/thumbs/inside/1280x960/jpg/vdn02259.webp", caption: "3D Printed Controller Stand — Angle View 1" },
+                    { src: "https://media.printables.com/media/prints/38c35292-d97c-491b-b7b4-184d647b82da/images/13094791_8bd18155-d120-4fec-8379-42b238b976ce_900d2825-afd5-4b46-bae7-7019cfb34244/thumbs/inside/1280x960/jpg/vdn02260.webp", caption: "3D Printed Controller Stand — Angle View 2" },
+                    { src: "https://media.printables.com/media/prints/8b774adf-950c-4d24-babc-49ccb4561059/images/13094787_74168d6e-d8d3-453a-95e9-28e9d1be1fd7_568070b3-c03b-4461-b019-a9dfbcdb7272/thumbs/inside/1280x960/jpg/vdn02263.webp", caption: "3D Printed Controller Stand — Angle View 3" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/f592fee3-4a47-4f30-8e2f-b296efdcde67/images/13785535_a1cb9413-cdf7-436e-81b5-929e3eea56e0_390c0716-048e-4287-82db-b33f3049f308/thumbs/inside/1280x960/jpg/a7306217_hd.webp", 
+                caption: "3D Printed Laptop Stand",
+                images: [
+                    { src: "https://media.printables.com/media/prints/76a6b706-8e3b-45ae-a3f8-39a0e11cbe28/images/13785534_5aaa74b9-32d9-4af6-b6e9-3ab9023a0765_be6426d1-9d31-4de6-a562-e345ffaa9ff5/thumbs/inside/1920x1440/png/frame-316128519.webp", caption: "3D Printed Laptop Stand — Frame View" },
+                    { src: "https://media.printables.com/media/prints/9ddbe513-426c-4f92-933b-e2840f30dc0d/images/13785537_7e1852a1-2ffe-4805-9b7e-3c0164221800_aa5726a4-6852-43eb-b263-8f222d0c3024/thumbs/inside/1920x1440/png/laptop-stand-visu.webp", caption: "3D Printed Laptop Stand — Visualization" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/ecdf0441-a119-4c0d-9d5e-553e50b86c87/images/13635195_b9bbe072-ef38-41fa-a757-081925cbd72f_af412d24-757c-475f-b8b1-059a6b83cebc/thumbs/inside/1280x960/jpeg/img_6323.webp",  
+                caption: "3D Printed Black Hole Lamp",
+                images: [
+                    { src: "https://media.printables.com/media/prints/fbda07f3-f19b-4934-b95c-231c88871cbe/images/13635192_ef33d0c8-399e-451f-8605-9146cbae24a0_c826490f-20da-4c07-9576-e61ea838e2b7/thumbs/inside/1280x960/jpeg/img_6320.webp", caption: "3D Printed Black Hole Lamp — Internal View" },
+                    { src: "https://media.printables.com/media/prints/a4e7f313-7861-490e-bbfa-f5bae72355be/images/13635198_908c7634-285e-4d79-923e-67899f3f9c1a_c3bf97f0-7972-4ca6-915d-1ec513abf4f8/thumbs/inside/1600x1200/jpeg/img_6326.webp", caption: "3D Printed Black Hole Lamp — Illuminated View" }
+                ]
+             },
+            { 
+                src: "https://media.printables.com/media/prints/550127/images/4609351_7bc7d6e9-85de-4e1d-b8bf-bf3acb28b14e/thumbs/inside/1280x960/jpg/dscn4523.webp", 
+                caption: "3D Printed Gear Fidget",
+                images: [
+                    { src: "https://media.printables.com/media/prints/550127/images/4609350_7b0cd798-fe63-4d16-b72a-70923702d6f3/thumbs/inside/1600x1200/jpg/dscn4526.webp", caption: "3D Printed Gear Fidget — Angle View 1" },
+                    { src: "https://media.printables.com/media/prints/550127/images/4464508_4125ad20-b8e9-41d9-b774-4459c03269a8/thumbs/inside/1600x1200/jpg/dscn4280.webp", caption: "3D Printed Gear Fidget — Angle View 2" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/e400d247-598d-4255-9ea6-86318f0a3975/images/10768484_f796fd26-7e13-4a98-88cc-b41894491577_15323d7f-09d7-4964-a4a1-c1003c49b6bb/gears-v34s2.gif", 
+                caption: "3D Modeled Educational Gear Examples",
+                images: [
+                    { src: "https://media.printables.com/media/prints/de5844a6-dbb7-4ede-a3d8-f45b37b4c06f/images/10766884_12ae3481-6289-416a-bda0-62c3705f8fe9_05ebc77b-1688-4a2f-becd-23a4a06304fe/thumbs/inside/1600x1200/jpg/pxl_20250928_040749804night.webp", caption: "3D Modeled Educational Gear Examples — Display 1" },
+                    { src: "https://media.printables.com/media/prints/a4c1bf04-284b-40d5-b8c5-2c225cd3c314/images/10766885_de150ca9-123b-4613-8d43-7918dc4a09c7_0aba198e-6bd5-4e91-8fbd-9d210cc0ad49/thumbs/inside/1600x1200/jpg/de169d0d-71a4-43b7-9367-fbba9094b7ca1.webp", caption: "3D Modeled Educational Gear Examples — Display 2" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/666bceb1-a575-4c45-8ad9-5ec02c9f1a36/images/11597645_a7221013-d9fa-4149-9168-aa8a9ab811a7_5cfc81ae-7809-4839-800e-5b6a986f2a0e/thumbs/inside/1920x1440/png/designer.webp", 
+                caption: "3D Printed Gears For Kids",
+                images: [
+                    { src: "https://media.printables.com/media/prints/b5e971dd-abbd-47ec-9af5-3e37e82b42e3/images/11968742_4b19eb0b-c57f-4987-92bd-a3595497d8ab_033089ee-a80d-41fe-939d-f697c979daa7/my-movie-14.gif", caption: "3D Printed Gears For Kids — Animation" },
+                    { src: "https://media.printables.com/media/prints/f1aa433e-81b8-498a-b2da-f3bb29dd9329/images/12084089_9afd8ab0-6a75-4826-bf4b-efdc51a38edb_c3491dc5-b791-45ca-b531-e17ad68dcfb5/img_5051.gif", caption: "3D Printed Gears For Kids — Motion View" },
+                    { src: "https://media.printables.com/media/prints/4b85f017-280a-4704-9768-bc6ca9f585cb/images/11596371_02715b11-c229-41dd-97ca-dac0623639e9_88952a20-9a09-4596-9e4f-1b208c9dc13b/thumbs/inside/1600x1200/jpeg/img_5045.webp", caption: "3D Printed Gears For Kids — Overview" },
+                    { src: "https://media.printables.com/media/prints/227a5e40-0f80-4ab7-947a-c8b67c842e36/images/11596370_74b00cb0-af3b-476a-928e-5e27bb0f6f2d_6a14e9aa-ad8f-405a-ba59-0e519f1338d5/thumbs/inside/1600x1200/jpeg/img_5047.webp", caption: "3D Printed Gears For Kids — Detail View" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/1051622/images/7966913_e0f56a4a-246a-4e5c-b90d-9a5884ceeef0_7e7409f0-294a-4f45-9ca8-85949f6f9630/ring1.gif", 
+                caption: "3D Printed Helical Gear Fidget",
+                images: [
+                    { src: "https://media.printables.com/media/prints/1051622/images/7966912_5fcdfa0c-c7e0-4c37-9129-d29256ce8c10_1e9d6cf6-b38e-48a9-b826-5c8aa39b2ca6/thumbs/inside/1600x1200/jpg/20241025_231225.webp", caption: "3D Printed Helical Gear Fidget — Angle View" }
+                ]
+            }
         ];
 
         function getGalleryImages() {
@@ -1901,6 +1941,13 @@ Preferred Time : ${dateTime}`;
                 imageEl.alt = img.caption || 'Gallery Image';
                 item.appendChild(imageEl);
 
+                if (img.images && img.images.length > 0) {
+                    const badge = document.createElement('div');
+                    badge.className = 'gallery-badge';
+                    badge.innerHTML = `<i class="fa-solid fa-images"></i> +${img.images.length} Photos`;
+                    item.appendChild(badge);
+                }
+
                 if (img.caption) {
                     const cap = document.createElement('div');
                     cap.className = 'gallery-caption';
@@ -1928,17 +1975,34 @@ Preferred Time : ${dateTime}`;
 
         function openLightbox(index) {
             if (activeGalleryList.length === 0) return;
-            lightboxIndex = index;
+            const item = activeGalleryList[index];
+            
+            if (item.images && item.images.length > 0) {
+                currentSubGallery = [ { src: item.src, caption: item.caption }, ...item.images ];
+                lightboxIndex = 0;
+            } else {
+                currentSubGallery = null;
+                lightboxIndex = index;
+            }
+
             updateLightbox();
             document.getElementById('galleryLightbox').style.display = 'flex';
         }
 
         function updateLightbox() {
-            if (activeGalleryList.length === 0) return;
-            lightboxIndex = (lightboxIndex + activeGalleryList.length) % activeGalleryList.length;
-            const currentItem = activeGalleryList[lightboxIndex];
+            const list = currentSubGallery ? currentSubGallery : activeGalleryList;
+            if (list.length === 0) return;
+            
+            lightboxIndex = (lightboxIndex + list.length) % list.length;
+            const currentItem = list[lightboxIndex];
+            
             document.getElementById('lightboxImg').src = currentItem.src;
-            document.getElementById('lightboxCaption').textContent = currentItem.caption || '';
+            
+            let captionText = currentItem.caption || '';
+            if (currentSubGallery) {
+                captionText += ` (${lightboxIndex + 1} / ${currentSubGallery.length})`;
+            }
+            document.getElementById('lightboxCaption').textContent = captionText;
         }
 
         function lightboxStep(direction) {
@@ -1948,6 +2012,7 @@ Preferred Time : ${dateTime}`;
 
         function closeLightbox() {
             document.getElementById('galleryLightbox').style.display = 'none';
+            currentSubGallery = null;
         }
 
         document.addEventListener('keydown', (e) => {
