@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBZ Software & Technologies | Cyberpunk Engineering Portal</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #121216;
+            --bg-card: rgba(22, 22, 28, 0.75);
+            --accent-red: #FF0000;
+            --accent-red-glow: rgba(255, 0, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(255, 0, 0, 0.35);
+            --font-heading: 'Orbitron', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red);
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-sub);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 6px 0;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-red);
+            transition: var(--transition);
+            box-shadow: 0 0 8px var(--accent-red);
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .nav-links a.active::after, .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .page-view {
+            display: none;
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .page-view.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.08) 0%, rgba(10, 10, 12, 1) 75%);
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: rotateX(60deg) translateY(0); }
+            100% { transform: rotateX(60deg) translateY(50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            font-family: var(--font-sub);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 40%, #a0a0ab 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 16px 32px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-red-glow);
+        }
+
+        .btn-primary:hover {
+            background: #cc0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 80px 5%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-bar {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            padding: 50px 5%;
+        }
+
+        .stat-item h3 {
+            font-size: 2.8rem;
+            color: var(--accent-red);
+            font-family: var(--font-heading);
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        .stat-item p {
+            font-family: var(--font-sub);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.15);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        /* Products Showcase Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+        }
+
+        .product-img-holder {
+            width: 100%;
+            height: 180px;
+            background: #181820;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .product-card:hover .product-img-holder {
+            color: var(--accent-red);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-red);
+            color: white;
+            font-size: 0.75rem;
+            font-family: var(--font-heading);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-family: var(--font-sub);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        /* About & Tech Stack */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: var(--font-sub);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Forms Layout */
+        .form-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-family: var(--font-sub);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            background: rgba(10, 10, 12, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            border-radius: 4px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-family: var(--font-sub);
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red-glow);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+        }
+
+        .portfolio-thumb {
+            height: 200px;
+            background: #181820;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--accent-red);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-family: var(--font-sub);
+            background: rgba(255, 0, 0, 0.15);
+            color: var(--accent-red);
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .estimate-box {
+            background: rgba(255, 0, 0, 0.05);
+            border: 1px dashed var(--accent-red);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .estimate-price {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--accent-red);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-red);
+            width: 100%;
+            max-width: 550px;
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-red);
+        }
+
+        footer {
+            background: #050507;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 5% 20px 5%;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg-card);
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img { transform: scale(1.06); }
+
+        .gallery-item:hover {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .gallery-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 0, 0, 0.85);
+            color: #fff;
+            font-family: var(--font-sub);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 2rem 1rem 0.8rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            font-family: var(--font-sub);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            opacity: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        .gallery-delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent-red);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+            z-index: 2;
+        }
+
+        .gallery-item.delete-mode { outline: 2px dashed var(--accent-red); }
+
+        .gallery-item.delete-mode::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 0, 0, 0.25);
+            pointer-events: none;
+        }
+
+        .gallery-item.delete-mode .gallery-delete-btn { display: flex; }
+
+        .gallery-empty {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-muted);
+        }
+
+        .gallery-empty i {
+            font-size: 4rem;
+            color: rgba(255, 0, 0, 0.4);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-empty h3 { color: var(--text-main); margin-bottom: 0.5rem; }
+
+        .admin-bar {
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            border: 1px dashed var(--accent-red);
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .admin-badge {
+            font-family: var(--font-sub);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+        }
+
+        .btn-danger {
+            background: #7a0d0d;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+        }
+
+        .btn-danger:hover {
+            background: #a01212;
+            transform: translateY(-3px);
+        }
+
+        .admin-error {
+            color: var(--accent-red);
+            font-family: var(--font-sub);
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* Lightbox Viewer */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 2500;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox img {
+            max-width: 88vw;
+            max-height: 80vh;
+            border-radius: 8px;
+            border: 1px solid var(--accent-red);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            margin-top: 15px;
+            font-family: var(--font-sub);
+            font-size: 1.1rem;
+            color: var(--text-main);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 28px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover { color: var(--accent-red); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(22, 22, 28, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        .lightbox-prev { left: 22px; }
+        .lightbox-next { right: 22px; }
+
+        @media (max-width: 868px) {
+            .lightbox-nav { width: 40px; height: 40px; }
+            .admin-bar .btn { width: 100%; justify-content: center; }
+        }
+
+        @media (max-width: 992px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 868px) {
+            .hamburger { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 80px; left: -100%; width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 10, 12, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                transition: var(--transition);
+            }
+            .nav-links.active { left: 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .estimate-box {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo" onclick="switchPage('home')">
+            <i class="fa-solid fa-microchip"></i> MBZ <span>TECH</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a class="nav-btn active" onclick="switchPage('home')"> Home</a></li>
+            <li><a class="nav-btn" onclick="switchPage('modeling')"> 3D Modeling & Print</a></li>
+            <li><a class="nav-btn" onclick="switchPage('services')"> IT & Windows Services</a></li>
+            <li><a class="nav-btn" onclick="switchPage('gallery')"> Gallery</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- PAGE 1: HOME (CONSOLIDATED) -->
+    <div id="page-home" class="page-view active-page">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Engineering & Hardware Solutions</span>
+                <h1>Software Architecture, AI & 3D Prototyping</h1>
+                <p>MBZ Software & Technologies provides specialized technical deployment. From native Windows background services and enterprise AI models to professional industrial 3D printing and PC hardware support.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="switchPage('modeling')"><i class="fa-solid fa-cube"></i> Request 3D Print</button>
+                    <button class="btn btn-secondary" onclick="switchPage('services')"><i class="fa-brands fa-windows"></i> Get IT & OS Support</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Highlight Section -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <h3>99.9%</h3>
+                <p>System Uptime</p>
+            </div>
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>3D Builds Delivered</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Enterprise Clients</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Technical Support</p>
+            </div>
+        </div>
+
+        <!-- 1. Core Services Section -->
+        <section class="container">
+            <div class="section-title-wrapper">
+                <h2>Core Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div>
+                        <i class="fa-brands fa-windows service-icon"></i>
+                        <h3>Windows Systems & Services</h3>
+                        <p>Custom Windows background services, system optimization, background automation, and native desktop software tailored for heavy enterprise operations.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-brain service-icon"></i>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Deploying intelligent LLM integrations, computer vision systems, predictive data modeling, and custom AI agents to automate business workflows.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-file-excel service-icon"></i>
+                        <h3>Advanced Excel & VBA</h3>
+                        <p>Complex spreadsheet architecture, macro/VBA script development, automated data parsing pipelines, and real-time dashboard visualization.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-code service-icon"></i>
+                        <h3>Custom Web Engineering</h3>
+                        <p>High-performance single-page web applications, modern responsive company portals, e-commerce infrastructure, and sleek UI/UX design.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-cube service-icon"></i>
+                        <h3>Precision 3D Printing</h3>
+                        <p>Rapid prototyping, industrial part fabrication using PLA, ABS, TPU, and Resin materials, standard engineering modeling, and custom 3D design rendering.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-server service-icon"></i>
+                        <h3>Hardware & Software Supply</h3>
+                        <p>Authorized reseller of commercial PC hardware, enterprise networking servers, custom workstation rigs, software license management, and retail 3D printers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Equipment & Hardware Supply Section -->
+        <section style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2>Equipment & Hardware Supply</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-print"></i>
+                            <span class="product-badge">Best Seller</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Industrial FDM 3D Printer</h3>
+                            <span class="product-price">Commercial Grade</span>
+                            <p>High-speed, dual-extruder 3D printer suitable for carbon fiber, resin, and standard filaments.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span class="product-badge">In Stock</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>AI Processing Workstations</h3>
+                            <span class="product-price">Custom Build</span>
+                            <p>Pre-configured multi-GPU desktop systems explicitly tuned for local AI model inference & rendering.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <span class="product-badge">Enterprise</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Windows Server Rigs</h3>
+                            <span class="product-price">Commercial</span>
+                            <p>Rack-mountable server hardware complete with official Windows Server licensing and setup.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-img-holder">
+                            <i class="fa-solid fa-cubes"></i>
+                            <span class="product-badge">Filament</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Engineering Filaments</h3>
+                            <span class="product-price">Bulk Supply</span>
+                            <p>Premium PETG, PLA+, TPU, and Carbon Fiber filament spools for high-stress mechanical parts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Who We Are Section -->
+        <section class="container">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 style="text-align: left; display: block;">Who We Are</h2>
+                    <p><strong>MBZ Software & Technologies</strong> operates at the intersection of computational engineering and physical hardware deployment. Founded with a vision to deliver robust tech infrastructures, we cater to small businesses, industrial operations, and enterprise environments.</p>
+                    <p>Whether you require a background Windows system service to handle multi-threaded processing, an AI-driven data automation system, a custom modern web app, or industrial-grade 3D printed mechanical prototypes, our team provides full end-to-end execution.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Windows API</span>
+                        <span class="tag">Python AI</span>
+                        <span class="tag">VBA / Excel</span>
+                        <span class="tag">CAD Design</span>
+                        <span class="tag">FDM / SLA Printing</span>
+                        <span class="tag">Vanilla JS</span>
+                        <span class="tag">Server Hardware</span>
+                    </div>
+                </div>
+                <div class="about-graphic" style="text-align: center; position: relative;">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 15rem; color: rgba(255, 0, 0, 0.1); text-shadow: 0 0 30px var(--accent-red-glow);"></i>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800;">
+                        MBZ <span style="color: var(--accent-red);">TECH</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Contact HQ Section -->
+        <section style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2>Contact HQ</h2>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Let's Build The Future</h3>
+                        <p>Send us a message regarding software projects, 3D printing orders, or hardware procurement. Our technicians respond within 24 hours.</p>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Headquarters</h4>
+                                <p>Doha, Bin Omran</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>muneebzz2002@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <h4>Direct Line</h4>
+                                <p>+974 55822034</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactHqForm">
+                        <div class="form-group">
+                            <label for="hqName">Full Name / Company</label>
+                            <input type="text" id="hqName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqEmail">Email Address</label>
+                            <input type="email" id="hqEmail" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqService">Service Needed</label>
+                            <select id="hqService" class="form-control" required>
+                                <option value="" disabled selected>Select a service...</option>
+                                <option value="Windows Services & Software">Windows Services & Software</option>
+                                <option value="AI / Machine Learning Integration">AI / Machine Learning Integration</option>
+                                <option value="Excel Automation / VBA">Excel Automation / VBA</option>
+                                <option value="Website Engineering">Website Engineering</option>
+                                <option value="3D Printing Service / Design">3D Printing Service / Design</option>
+                                <option value="Hardware / 3D Printer Purchase">Hardware / 3D Printer Purchase</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hqMessage">Project Brief</label>
+                            <textarea id="hqMessage" class="form-control" style="min-height: 100px;" placeholder="Describe your requirements or hardware specifications..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; justify-content: center;">
+                            <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 2: 3D MODELING & PRINTING -->
+    <div id="page-modeling" class="page-view">
+        <section class="container">
+            <div class="section-title-wrapper">
+                <h2>3D Print & Modeling Studio</h2>
+                <p>Upload specifications or order functional mechanical prototypes direct from our print lab.</p>
+            </div>
+
+            <div class="form-container" style="margin-bottom: 80px;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent-red);"><i class="fa-solid fa-sliders"></i> Interactive Print Order & Estimator</h3>
+                <form id="printForm" oninput="calculateEstimate()">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Model Name / Project Title</label>
+                            <input type="text" id="modelTitle" class="form-control" placeholder="e.g. Desk Ornament" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Client Email Address</label>
+                            <input type="email" id="clientEmail3D" class="form-control" placeholder="XYZ@domain.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Filament Material</label>
+                            <select id="filamentType" class="form-control">
+                                <option value="100">PLA (Standard Prototype - QAR 1/1g)</option>
+                                <option value="150">TPU (Flexible Rubber - QAR 1.50/1g)</option>
+                                <option value="150">PETG (High Strength - QAR 1.50/1g)</option>
+                                <option value="200">ABS/ASA (Precision Detail - QAR 2/1g)</option>
+                                <option value="200">Nylon (Extremely rugged, durable & stress-resistant - QAR 2/1g)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Print Density Preset</label>
+                            <select id="infillPreset" class="form-control">
+                                <option value="Standard Print">Standard Print (20% Infill - Light Use)</option>
+                                <option value="Medium Infill">Medium Infill (50% Infill - Durable Models)</option>
+                                <option value="Solid Print">Solid Print (100% Infill - Heavy Duty)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Estimated Weight (Grams) Including Density</label>
+                            <input type="number" id="weight" class="form-control" value="100" min="10">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>CAD Specifications / Special Notes</label>
+                            <textarea id="notes" class="form-control" style="min-height: 80px;" placeholder="Specify key tolerances, threaded insert requirements, or layer height preferences..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="estimate-box">
+                        <div>
+                            <h4>Estimated Print Cost:</h4>
+                            <p>Calculated strictly by weight and material rate.</p>
+                        </div>
+                        <div class="estimate-price" id="totalEstimate">QAR 100.00</div>
+                    </div>
+
+                    <button type="submit" id="btn3DSubmit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <div class="section-title-wrapper">
+                <h2>Prototyping Showcase</h2>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterPortfolio('all')">All</button>
+                <button class="filter-btn" onclick="filterPortfolio('mechanical')">Mechanical</button>
+                <button class="filter-btn" onclick="filterPortfolio('functional')">Functional</button>
+                <button class="filter-btn" onclick="filterPortfolio('enclosure')">Enclosures</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-cat="mechanical">
+                    <div class="portfolio-thumb"><i class="fa-solid fa-fan"></i></div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-tag">Mechanical</span>
+                        <h4>Radial Turbine Runner (38cm)</h4>
+                        <p>High-torque cupped blade design printed in PETG Carbon Fiber for fluid impulse tests.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-cat="enclosure">
+                    <div class="portfolio-thumb"><i class="fa-solid fa-box"></i></div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-tag">Enclosure</span>
+                        <h4>Waterproof Generator Shell</h4>
+                        <p>Custom gasketed shell designed for severe weather telemetry and sensor boards.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-cat="functional">
+                    <div class="portfolio-thumb"><i class="fa-solid fa-gears"></i></div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-tag">Functional</span>
+                        <h4>Helical Speed Reducer Gear</h4>
+                        <p>Print-in-place planetary gearbox with custom keyway shaft locks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 3: IT SERVICES -->
+    <div id="page-services" class="page-view">
+        <section class="container">
+            <div class="section-title-wrapper">
+                <h2>IT & Windows Solutions Center</h2>
+                <p>Order software deployments, Windows OS servicing, and specialized tech help.</p>
+            </div>
+
+            <div class="services-grid" style="margin-bottom: 60px;">
+                <div class="service-card">
+                    <div>
+                        <i class="fa-brands fa-windows service-icon"></i>
+                        <h3>Windows OS Installation & Tuning</h3>
+                        <p>Clean official Windows 10/11 Pro installations, driver updates, telemetry cleanup, and speed optimizations.</p>
+                    </div>
+                    <a href="https://wa.me/97433887222" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; text-decoration: none; display: inline-flex; justify-content: center; align-items: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Order Service
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-headset service-icon"></i>
+                        <h3>Remote Tech Support Ticket</h3>
+                        <p>Direct remote desktop diagnosis for hardware glitches, software bugs, driver conflicts, and networking issue resolution.</p>
+                    </div>
+                    <a href="https://wa.me/97433887222" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; text-decoration: none; display: inline-flex; justify-content: center; align-items: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Book Session
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <i class="fa-solid fa-file-excel service-icon"></i>
+                        <h3>Excel & VBA Macro Automation</h3>
+                        <p>Custom automated Excel spreadsheets, financial dashboard generators, and Python data scraping routines.</p>
+                    </div>
+                    <a href="https://wa.me/97433887222" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; text-decoration: none; display: inline-flex; justify-content: center; align-items: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Request Script
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent-red);"><i class="fa-solid fa-ticket"></i> Submit Instant Service Ticket</h3>
+                <form id="ticketForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="ticketName" class="form-control" placeholder="e.g. Alex Mercer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="ticketEmail" class="form-control" placeholder="alex@domain.com" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Service Category</label>
+                            <select id="ticketCategory" class="form-control">
+                                <option>Windows OS / Software Installation</option>
+                                <option>Computer Hardware Upgrade / Repair</option>
+                                <option>AI Integration Support</option>
+                                <option>Excel VBA Script Request</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Describe the Issue or Request</label>
+                            <textarea id="ticketDetails" class="form-control" style="min-height: 100px;" placeholder="Provide PC specs or error message details..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" id="btnTicketSubmit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 4: GALLERY -->
+    <div id="page-gallery" class="page-view">
+        <section class="container">
+            <div class="section-title-wrapper">
+                <h2>Project Gallery</h2>
+                <p>Selected builds, prints, and deployments delivered by the MBZ lab.</p>
+            </div>
+
+            <div class="admin-bar" id="galleryAdminBar">
+                <span class="admin-badge"><i class="fa-solid fa-user-shield"></i> Admin Mode Active</span>
+                <button class="btn btn-primary" id="btnOpenUpload" onclick="openAdminModal()">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Image
+                </button>
+                <button class="btn btn-secondary" id="btnToggleDelete" onclick="toggleGalleryDeleteMode()">
+                    <i class="fa-solid fa-trash-can"></i> Delete Images
+                </button>
+                <button class="btn btn-danger" onclick="adminLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery Items are rendered via JS script below -->
+            </div>
+
+            <div class="gallery-empty" id="galleryEmpty" style="display: none;">
+                <i class="fa-solid fa-images"></i>
+                <h3>No Images Found</h3>
+                <p>Check back later for updated project snapshots.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Upload Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAdminModal()">&times;</span>
+            <div id="adminLoginStep">
+                <h3 style="color: var(--accent-red); margin-bottom: 1rem;"><i class="fa-solid fa-user-shield"></i> Admin Access</h3>
+                <p style="margin-bottom: 1.5rem;">Restricted area. Enter the admin passcode to publish gallery images.</p>
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label>Admin Passcode</label>
+                        <input type="password" id="adminPasscode" class="form-control" placeholder="••••••••" autocomplete="off" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fa-solid fa-unlock"></i> Unlock Admin Mode
+                    </button>
+                    <p class="admin-error" id="adminError" style="display: none;"></p>
+                </form>
+            </div>
+            <div id="adminUploadStep" style="display: none;">
+                <h3 style="color: var(--accent-red); margin-bottom: 1rem;"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Gallery Image</h3>
+                <p style="margin-bottom: 1.5rem;">Select an image and it will be published to the public gallery instantly.</p>
+                <form id="galleryUploadForm">
+                    <div class="form-group">
+                        <label>Image File (JPG / PNG / GIF / WebP)</label>
+                        <input type="file" id="galleryFile" class="form-control" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Caption (Optional)</label>
+                        <input type="text" id="galleryCaption" class="form-control" maxlength="80" placeholder="e.g. Turbine runner — PETG-CF">
+                    </div>
+                    <button type="submit" id="btnGalleryUpload" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fa-solid fa-paper-plane"></i> Publish to Gallery
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div class="lightbox" id="galleryLightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <img id="lightboxImg" src="" alt="Enlarged view">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+        <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+            <h3 id="modalServiceTitle" style="color: var(--accent-red); margin-bottom: 1rem;">Service Request</h3>
+            <p style="margin-bottom: 1.5rem;">Fill in your contact email to confirm your service booking with an MBZ technician.</p>
+            <form id="modalForm">
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" id="modalEmail" class="form-control" required placeholder="client@company.com">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="datetime-local" id="modalDateTime" class="form-control" required>
+                </div>
+                <button type="submit" id="btnModalSubmit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">
+                    <i class="fa-brands fa-whatsapp"></i> Confirm via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" onclick="switchPage('home')">
+                <i class="fa-solid fa-microchip"></i> MBZ <span>TECH</span>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/mbztechgroup/?hl=en" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/97433887222" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 MBZ Software & Technologies. All Rights Reserved. Engineered for Performance.
+        </div>
+    </footer>
+
+    <script>
+        const PHONE_NUMBER = "97433887222";
+
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => p.classList.remove('active-page'));
+
+            const navs = document.querySelectorAll('.nav-btn');
+            navs.forEach(n => n.classList.remove('active'));
+
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active-page');
+            }
+
+            const pageNavMap = { home: 0, modeling: 1, services: 2, gallery: 3 };
+            const navIndex = pageNavMap[pageId];
+            if (navIndex !== undefined && navs[navIndex]) navs[navIndex].classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const navLinks = document.getElementById('navLinks');
+            const hamburgerIcon = document.querySelector('#hamburger i');
+            navLinks.classList.remove('active');
+            if (hamburgerIcon) {
+                hamburgerIcon.classList.remove('fa-xmark');
+                hamburgerIcon.classList.add('fa-bars');
+            }
+        }
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        function calculateEstimate() {
+            const materialRate = parseFloat(document.getElementById('filamentType').value) || 100;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+
+            const baseCost = (weight / 100) * materialRate;
+            const total = Math.max(0, baseCost);
+
+            document.getElementById('totalEstimate').innerText = `QAR ${total.toFixed(2)}`;
+        }
+
+        function filterPortfolio(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-cat') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        let selectedServiceTitle = '';
+        function openOrderModal(serviceName) {
+            selectedServiceTitle = serviceName;
+            document.getElementById('modalServiceTitle').innerText = `Order: ${serviceName}`;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Forms Handlers
+        document.getElementById('contactHqForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('hqName').value;
+            const email = document.getElementById('hqEmail').value;
+            const service = document.getElementById('hqService').value;
+            const messageText = document.getElementById('hqMessage').value;
+
+            const message = `Project Request via HQ Portal
+Client Name / Company : ${name}
+Email : ${email}
+Service Needed : ${service}
+Project Brief : ${messageText}`;
+
+            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        document.getElementById('printForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('modelTitle').value;
+            const email = document.getElementById('clientEmail3D').value;
+            const rawFilament = document.getElementById('filamentType').options[document.getElementById('filamentType').selectedIndex].text;
+            const filament = rawFilament.split('(')[0].trim();
+            const density = document.getElementById('infillPreset').options[document.getElementById('infillPreset').selectedIndex].text;
+            const weight = document.getElementById('weight').value;
+            const notes = document.getElementById('notes').value || "None";
+            const estimate = document.getElementById('totalEstimate').innerText;
+
+            const message = `I want a 3d model printed
+Model name : ${title}
+Email : ${email}
+Filament : ${filament}
+Density : ${density}
+Estimated weight : ${weight} Gram
+Special Note : ${notes}
+Estimated Cost : ${estimate}`;
+
+            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        document.getElementById('ticketForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('ticketName').value;
+            const email = document.getElementById('ticketEmail').value;
+            const category = document.getElementById('ticketCategory').value;
+            const details = document.getElementById('ticketDetails').value;
+
+            const message = `IT Support Ticket
+Client Name : ${name}
+Email : ${email}
+Category : ${category}
+Details : ${details}`;
+
+            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        document.getElementById('modalForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('modalEmail').value;
+            const dateTime = document.getElementById('modalDateTime').value;
+
+            const message = `Service Order Booking
+Service : ${selectedServiceTitle}
+Client Email : ${email}
+Preferred Time : ${dateTime}`;
+
+            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            closeOrderModal();
+        });
+
+        // ===================== GALLERY SYSTEM =====================
+
+        const ADMIN_PASSCODE = 'mbz-admin-2026';
+        const GALLERY_KEY = 'mbzGalleryImages';
+        let galleryDeleteMode = false;
+        let lightboxIndex = 0;
+        let activeGalleryList = [];
+        let currentSubGallery = null; // Holds nested images when viewing a group in Lightbox
+
+        const defaultGalleryItems = [
+            { 
+                src: "https://media.printables.com/media/prints/ac2c7261-bbe2-420e-86e1-1c3cb62e888c/images/13094786_ca4bfdf0-f238-4733-8f08-5c67303c8db3_8dd86129-282d-4ca4-8d9c-3f7b24211dd9/cover-verti-2-horizon.gif", 
+                caption: "3D Printed Controller Stand — PLA",
+                images: [
+                    { src: "https://media.printables.com/media/prints/a86a5c6c-d99c-45e0-a126-c77e476e92ed/images/13094794_7c93b81c-7176-4013-943e-48549afb690e_35ae40ce-2d28-4fbf-a01a-183e6738de62/thumbs/inside/1280x960/jpg/vdn02259.webp", caption: "3D Printed Controller Stand — Angle View 1" },
+                    { src: "https://media.printables.com/media/prints/38c35292-d97c-491b-b7b4-184d647b82da/images/13094791_8bd18155-d120-4fec-8379-42b238b976ce_900d2825-afd5-4b46-bae7-7019cfb34244/thumbs/inside/1280x960/jpg/vdn02260.webp", caption: "3D Printed Controller Stand — Angle View 2" },
+                    { src: "https://media.printables.com/media/prints/8b774adf-950c-4d24-babc-49ccb4561059/images/13094787_74168d6e-d8d3-453a-95e9-28e9d1be1fd7_568070b3-c03b-4461-b019-a9dfbcdb7272/thumbs/inside/1280x960/jpg/vdn02263.webp", caption: "3D Printed Controller Stand — Angle View 3" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/f592fee3-4a47-4f30-8e2f-b296efdcde67/images/13785535_a1cb9413-cdf7-436e-81b5-929e3eea56e0_390c0716-048e-4287-82db-b33f3049f308/thumbs/inside/1280x960/jpg/a7306217_hd.webp", 
+                caption: "3D Printed Laptop Stand",
+                images: [
+                    { src: "https://media.printables.com/media/prints/76a6b706-8e3b-45ae-a3f8-39a0e11cbe28/images/13785534_5aaa74b9-32d9-4af6-b6e9-3ab9023a0765_be6426d1-9d31-4de6-a562-e345ffaa9ff5/thumbs/inside/1920x1440/png/frame-316128519.webp", caption: "3D Printed Laptop Stand — Frame View" },
+                    { src: "https://media.printables.com/media/prints/9ddbe513-426c-4f92-933b-e2840f30dc0d/images/13785537_7e1852a1-2ffe-4805-9b7e-3c0164221800_aa5726a4-6852-43eb-b263-8f222d0c3024/thumbs/inside/1920x1440/png/laptop-stand-visu.webp", caption: "3D Printed Laptop Stand — Visualization" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/ecdf0441-a119-4c0d-9d5e-553e50b86c87/images/13635195_b9bbe072-ef38-41fa-a757-081925cbd72f_af412d24-757c-475f-b8b1-059a6b83cebc/thumbs/inside/1280x960/jpeg/img_6323.webp",  
+                caption: "3D Printed Black Hole Lamp",
+                images: [
+                    { src: "https://media.printables.com/media/prints/fbda07f3-f19b-4934-b95c-231c88871cbe/images/13635192_ef33d0c8-399e-451f-8605-9146cbae24a0_c826490f-20da-4c07-9576-e61ea838e2b7/thumbs/inside/1280x960/jpeg/img_6320.webp", caption: "3D Printed Black Hole Lamp — Internal View" },
+                    { src: "https://media.printables.com/media/prints/a4e7f313-7861-490e-bbfa-f5bae72355be/images/13635198_908c7634-285e-4d79-923e-67899f3f9c1a_c3bf97f0-7972-4ca6-915d-1ec513abf4f8/thumbs/inside/1600x1200/jpeg/img_6326.webp", caption: "3D Printed Black Hole Lamp — Illuminated View" }
+                ]
+             },
+            { 
+                src: "https://media.printables.com/media/prints/550127/images/4609351_7bc7d6e9-85de-4e1d-b8bf-bf3acb28b14e/thumbs/inside/1280x960/jpg/dscn4523.webp", 
+                caption: "3D Printed Gear Fidget",
+                images: [
+                    { src: "https://media.printables.com/media/prints/550127/images/4609350_7b0cd798-fe63-4d16-b72a-70923702d6f3/thumbs/inside/1600x1200/jpg/dscn4526.webp", caption: "3D Printed Gear Fidget — Angle View 1" },
+                    { src: "https://media.printables.com/media/prints/550127/images/4464508_4125ad20-b8e9-41d9-b774-4459c03269a8/thumbs/inside/1600x1200/jpg/dscn4280.webp", caption: "3D Printed Gear Fidget — Angle View 2" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/e400d247-598d-4255-9ea6-86318f0a3975/images/10768484_f796fd26-7e13-4a98-88cc-b41894491577_15323d7f-09d7-4964-a4a1-c1003c49b6bb/gears-v34s2.gif", 
+                caption: "3D Modeled Educational Gear Examples",
+                images: [
+                    { src: "https://media.printables.com/media/prints/de5844a6-dbb7-4ede-a3d8-f45b37b4c06f/images/10766884_12ae3481-6289-416a-bda0-62c3705f8fe9_05ebc77b-1688-4a2f-becd-23a4a06304fe/thumbs/inside/1600x1200/jpg/pxl_20250928_040749804night.webp", caption: "3D Modeled Educational Gear Examples — Display 1" },
+                    { src: "https://media.printables.com/media/prints/a4c1bf04-284b-40d5-b8c5-2c225cd3c314/images/10766885_de150ca9-123b-4613-8d43-7918dc4a09c7_0aba198e-6bd5-4e91-8fbd-9d210cc0ad49/thumbs/inside/1600x1200/jpg/de169d0d-71a4-43b7-9367-fbba9094b7ca1.webp", caption: "3D Modeled Educational Gear Examples — Display 2" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/666bceb1-a575-4c45-8ad9-5ec02c9f1a36/images/11597645_a7221013-d9fa-4149-9168-aa8a9ab811a7_5cfc81ae-7809-4839-800e-5b6a986f2a0e/thumbs/inside/1920x1440/png/designer.webp", 
+                caption: "3D Printed Gears For Kids",
+                images: [
+                    { src: "https://media.printables.com/media/prints/b5e971dd-abbd-47ec-9af5-3e37e82b42e3/images/11968742_4b19eb0b-c57f-4987-92bd-a3595497d8ab_033089ee-a80d-41fe-939d-f697c979daa7/my-movie-14.gif", caption: "3D Printed Gears For Kids — Animation" },
+                    { src: "https://media.printables.com/media/prints/f1aa433e-81b8-498a-b2da-f3bb29dd9329/images/12084089_9afd8ab0-6a75-4826-bf4b-efdc51a38edb_c3491dc5-b791-45ca-b531-e17ad68dcfb5/img_5051.gif", caption: "3D Printed Gears For Kids — Motion View" },
+                    { src: "https://media.printables.com/media/prints/4b85f017-280a-4704-9768-bc6ca9f585cb/images/11596371_02715b11-c229-41dd-97ca-dac0623639e9_88952a20-9a09-4596-9e4f-1b208c9dc13b/thumbs/inside/1600x1200/jpeg/img_5045.webp", caption: "3D Printed Gears For Kids — Overview" },
+                    { src: "https://media.printables.com/media/prints/227a5e40-0f80-4ab7-947a-c8b67c842e36/images/11596370_74b00cb0-af3b-476a-928e-5e27bb0f6f2d_6a14e9aa-ad8f-405a-ba59-0e519f1338d5/thumbs/inside/1600x1200/jpeg/img_5047.webp", caption: "3D Printed Gears For Kids — Detail View" }
+                ]
+            },
+            { 
+                src: "https://media.printables.com/media/prints/1051622/images/7966913_e0f56a4a-246a-4e5c-b90d-9a5884ceeef0_7e7409f0-294a-4f45-9ca8-85949f6f9630/ring1.gif", 
+                caption: "3D Printed Helical Gear Fidget",
+                images: [
+                    { src: "https://media.printables.com/media/prints/1051622/images/7966912_5fcdfa0c-c7e0-4c37-9129-d29256ce8c10_1e9d6cf6-b38e-48a9-b826-5c8aa39b2ca6/thumbs/inside/1600x1200/jpg/20241025_231225.webp", caption: "3D Printed Helical Gear Fidget — Angle View" }
+                ]
+            }
+        ];
+
+        function getGalleryImages() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(GALLERY_KEY));
+                return stored && stored.length > 0 ? stored : defaultGalleryItems;
+            } catch (e) {
+                return defaultGalleryItems;
+            }
+        }
+
+        function saveGalleryImages(images) {
+            localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
+        }
+
+        function isAdmin() {
+            return sessionStorage.getItem('mbzAdminAuthed') === 'true';
+        }
+
+        function setAdminAuthed(value) {
+            if (value) sessionStorage.setItem('mbzAdminAuthed', 'true');
+            else sessionStorage.removeItem('mbzAdminAuthed');
+            renderGallery();
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminError').style.display = 'none';
+            if (isAdmin()) {
+                document.getElementById('adminLoginStep').style.display = 'none';
+                document.getElementById('adminUploadStep').style.display = 'block';
+            } else {
+                document.getElementById('adminLoginStep').style.display = 'block';
+                document.getElementById('adminUploadStep').style.display = 'none';
+                document.getElementById('adminPasscode').value = '';
+            }
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasscode').value;
+            const errorBox = document.getElementById('adminError');
+            if (pass === ADMIN_PASSCODE) {
+                setAdminAuthed(true);
+                closeAdminModal();
+            } else {
+                errorBox.innerText = 'ACCESS DENIED: Invalid passcode.';
+                errorBox.style.display = 'block';
+                document.getElementById('adminPasscode').value = '';
+            }
+        });
+
+        function adminLogout() {
+            setAdminAuthed(false);
+            galleryDeleteMode = false;
+        }
+
+        function toggleGalleryDeleteMode() {
+            galleryDeleteMode = !galleryDeleteMode;
+            const btn = document.getElementById('btnToggleDelete');
+            btn.classList.toggle('active', galleryDeleteMode);
+            btn.innerHTML = galleryDeleteMode
+                ? '<i class="fa-solid fa-check"></i> Done Deleting'
+                : '<i class="fa-solid fa-trash-can"></i> Delete Images';
+            renderGallery();
+        }
+
+        document.getElementById('galleryUploadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('galleryFile');
+            const caption = document.getElementById('galleryCaption').value.trim();
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+                const images = getGalleryImages();
+                images.unshift({ src: evt.target.result, caption: caption || '', date: new Date().toISOString() });
+                try {
+                    saveGalleryImages(images);
+                } catch (err) {
+                    alert('Image size exceeds local storage capacity. Please select a smaller file.');
+                    return;
+                }
+                document.getElementById('galleryCaption').value = '';
+                fileInput.value = '';
+                closeAdminModal();
+                renderGallery();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function deleteGalleryImage(index) {
+            const images = getGalleryImages();
+            const target = images[index];
+            const label = target && target.caption ? `"${target.caption}"` : 'this image';
+            if (confirm(`Delete ${label} from the gallery?`)) {
+                images.splice(index, 1);
+                saveGalleryImages(images);
+                renderGallery();
+            }
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            const empty = document.getElementById('galleryEmpty');
+            const adminBar = document.getElementById('galleryAdminBar');
+            activeGalleryList = getGalleryImages();
+            const admin = isAdmin();
+
+            adminBar.style.display = admin ? 'flex' : 'none';
+            if (!admin) galleryDeleteMode = false;
+            empty.style.display = activeGalleryList.length === 0 ? 'block' : 'none';
+
+            grid.innerHTML = '';
+            activeGalleryList.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item' + (admin && galleryDeleteMode ? ' delete-mode' : '');
+
+                const imageEl = document.createElement('img');
+                imageEl.src = img.src;
+                imageEl.alt = img.caption || 'Gallery Image';
+                item.appendChild(imageEl);
+
+                if (img.images && img.images.length > 0) {
+                    const badge = document.createElement('div');
+                    badge.className = 'gallery-badge';
+                    badge.innerHTML = `<i class="fa-solid fa-images"></i> +${img.images.length} Photos`;
+                    item.appendChild(badge);
+                }
+
+                if (img.caption) {
+                    const cap = document.createElement('div');
+                    cap.className = 'gallery-caption';
+                    cap.textContent = img.caption;
+                    item.appendChild(cap);
+                }
+
+                if (admin && galleryDeleteMode) {
+                    const del = document.createElement('button');
+                    del.className = 'gallery-delete-btn';
+                    del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+                    del.title = 'Delete image';
+                    del.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteGalleryImage(index);
+                    });
+                    item.appendChild(del);
+                } else {
+                    item.addEventListener('click', () => openLightbox(index));
+                }
+
+                grid.appendChild(item);
+            });
+        }
+
+        function openLightbox(index) {
+            if (activeGalleryList.length === 0) return;
+            const item = activeGalleryList[index];
+            
+            if (item.images && item.images.length > 0) {
+                currentSubGallery = [ { src: item.src, caption: item.caption }, ...item.images ];
+                lightboxIndex = 0;
+            } else {
+                currentSubGallery = null;
+                lightboxIndex = index;
+            }
+
+            updateLightbox();
+            document.getElementById('galleryLightbox').style.display = 'flex';
+        }
+
+        function updateLightbox() {
+            const list = currentSubGallery ? currentSubGallery : activeGalleryList;
+            if (list.length === 0) return;
+            
+            lightboxIndex = (lightboxIndex + list.length) % list.length;
+            const currentItem = list[lightboxIndex];
+            
+            document.getElementById('lightboxImg').src = currentItem.src;
+            
+            let captionText = currentItem.caption || '';
+            if (currentSubGallery) {
+                captionText += ` (${lightboxIndex + 1} / ${currentSubGallery.length})`;
+            }
+            document.getElementById('lightboxCaption').textContent = captionText;
+        }
+
+        function lightboxStep(direction) {
+            lightboxIndex += direction;
+            updateLightbox();
+        }
+
+        function closeLightbox() {
+            document.getElementById('galleryLightbox').style.display = 'none';
+            currentSubGallery = null;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('galleryLightbox');
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxStep(-1);
+            if (e.key === 'ArrowRight') lightboxStep(1);
+        });
+
+        document.getElementById('galleryLightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'galleryLightbox') closeLightbox();
+        });
+
+        // Initialize Gallery
+        renderGallery();
+    </script>
+</body>
+</html>
