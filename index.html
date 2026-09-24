@@ -715,8 +715,6 @@
             padding: 2.5rem;
             position: relative;
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         .close-modal {
@@ -971,142 +969,6 @@
         .lightbox-prev { left: 22px; }
         .lightbox-next { right: 22px; }
 
-        /* BLOG STYLES */
-        .blogs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--accent-red);
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
-        }
-
-        .blog-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #181820;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .blog-body {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-        }
-
-        .blog-tag {
-            background: rgba(255, 0, 0, 0.15);
-            color: var(--accent-red);
-            font-family: var(--font-sub);
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 3px;
-            text-transform: uppercase;
-        }
-
-        .blog-title {
-            font-size: 1.2rem;
-            color: var(--text-main);
-            margin-bottom: 0.8rem;
-            line-height: 1.3;
-        }
-
-        .blog-content {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-            flex-grow: 1;
-            white-space: pre-line;
-        }
-
-        .blog-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent-red);
-            font-family: var(--font-sub);
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            align-self: flex-start;
-            transition: var(--transition);
-        }
-
-        .blog-link:hover {
-            color: #fff;
-            text-shadow: 0 0 10px var(--accent-red);
-        }
-
-        .blog-delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--accent-red);
-            color: #fff;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            z-index: 5;
-        }
-
-        .admin-float-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--accent-red);
-            color: var(--accent-red);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1500;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        .admin-float-btn:hover {
-            background: var(--accent-red);
-            color: #fff;
-            box-shadow: 0 0 25px var(--accent-red);
-            transform: scale(1.1);
-        }
-
         @media (max-width: 868px) {
             .lightbox-nav { width: 40px; height: 40px; }
             .admin-bar .btn { width: 100%; justify-content: center; }
@@ -1155,7 +1017,6 @@
             <li><a class="nav-btn active" onclick="switchPage('home')"> Home</a></li>
             <li><a class="nav-btn" onclick="switchPage('modeling')"> 3D Modeling & Print</a></li>
             <li><a class="nav-btn" onclick="switchPage('services')"> IT & Windows Services</a></li>
-            <li><a class="nav-btn" onclick="switchPage('blogs')"> Blogs</a></li>
             <li><a class="nav-btn" onclick="switchPage('gallery')"> Gallery</a></li>
         </ul>
         <div class="hamburger" id="hamburger">
@@ -1163,18 +1024,13 @@
         </div>
     </nav>
 
-    <!-- Floating Admin Access Key -->
-    <button class="admin-float-btn" onclick="openBlogAdminModal()" title="Admin Blog Portal">
-        <i class="fa-solid fa-key"></i>
-    </button>
-
-    <!-- PAGE 1: HOME -->
+    <!-- PAGE 1: HOME (CONSOLIDATED) -->
     <div id="page-home" class="page-view active-page">
         <!-- Hero Section -->
         <div class="hero">
             <div class="hero-grid"></div>
             <div class="hero-content">
-                <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Engineering & Hardware Solutions</span>
+                <span class="hero-badge"><i class="fa-solid fa-bolt"></i>  Engineering & Hardware Solutions</span>
                 <h1>Software Architecture, AI & 3D Prototyping</h1>
                 <p>MBZ Software & Technologies provides specialized technical deployment. From native Windows background services and enterprise AI models to professional industrial 3D printing and PC hardware support.</p>
                 <div class="hero-cta">
@@ -1600,34 +1456,7 @@
         </section>
     </div>
 
-    <!-- PAGE 4: BLOGS -->
-    <div id="page-blogs" class="page-view">
-        <section class="container">
-            <div class="section-title-wrapper">
-                <h2>Engineering & Tech Insights</h2>
-                <p>Latest articles, technical logs, and software announcements from MBZ.</p>
-            </div>
-
-            <div class="admin-bar" id="blogAdminBar">
-                <span class="admin-badge"><i class="fa-solid fa-user-shield"></i> Blog Admin Mode Active</span>
-                <button class="btn btn-primary" onclick="openBlogAdminModal()">
-                    <i class="fa-solid fa-pen-to-square"></i> Create New Post
-                </button>
-                <button class="btn btn-danger" onclick="adminLogout()">
-                    <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                </button>
-            </div>
-
-            <div class="blogs-grid" id="blogsGrid"></div>
-            <div class="gallery-empty" id="blogsEmpty">
-                <i class="fa-solid fa-newspaper"></i>
-                <h3>No Blog Posts Yet</h3>
-                <p>Articles published by the administrator will appear here.</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- PAGE 5: GALLERY -->
+    <!-- PAGE 4: GALLERY -->
     <div id="page-gallery" class="page-view">
         <section class="container">
             <div class="section-title-wrapper">
@@ -1657,58 +1486,7 @@
         </section>
     </div>
 
-    <!-- ADMIN BLOG MODAL -->
-    <div class="modal" id="blogAdminModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeBlogAdminModal()">&times;</span>
-            <div id="blogAdminLoginStep">
-                <h3 style="color: var(--accent-red); margin-bottom: 1rem;"><i class="fa-solid fa-lock"></i> Blog Admin Portal</h3>
-                <p style="margin-bottom: 1.5rem;">Enter the passcode to publish and manage blog posts.</p>
-                <form id="blogLoginForm">
-                    <div class="form-group">
-                        <label>Admin Passcode</label>
-                        <input type="password" id="blogAdminPasscode" class="form-control" placeholder="••••••••" autocomplete="off" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        <i class="fa-solid fa-unlock"></i> Unlock Admin Access
-                    </button>
-                    <p class="admin-error" id="blogAdminError" style="display: none;"></p>
-                </form>
-            </div>
-
-            <div id="blogPublishStep" style="display: none;">
-                <h3 style="color: var(--accent-red); margin-bottom: 1rem;"><i class="fa-solid fa-newspaper"></i> Create New Blog Post</h3>
-                <form id="blogPostForm">
-                    <div class="form-group">
-                        <label>Blog Title</label>
-                        <input type="text" id="blogTitle" class="form-control" placeholder="e.g. Optimizing Windows Services for AI Workloads">
-                    </div>
-                    <div class="form-group">
-                        <label>Category Tag</label>
-                        <input type="text" id="blogCategory" class="form-control" placeholder="e.g. AI, Windows, 3D Printing" >
-                    </div>
-                    <div class="form-group">
-                        <label>Cover Image (File Upload or Image URL)</label>
-                        <input type="file" id="blogImageFile" class="form-control" accept="image/*" style="margin-bottom: 8px;">
-                        <input type="url" id="blogImageUrl" class="form-control" placeholder="https://example.com/image.jpg">
-                    </div>
-                    <div class="form-group">
-                        <label>External Link / Project URL (Optional)</label>
-                        <input type="url" id="blogLink" class="form-control" placeholder="https://github.com or article link">
-                    </div>
-                    <div class="form-group">
-                        <label>Article Content</label>
-                        <textarea id="blogContent" class="form-control" style="min-height: 120px;" placeholder="Write your post content here..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        <i class="fa-solid fa-paper-plane"></i> Publish Blog Post
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Upload Modal (Gallery) -->
+    <!-- Admin Upload Modal -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAdminModal()">&times;</span>
@@ -1806,7 +1584,7 @@
                 targetPage.classList.add('active-page');
             }
 
-            const pageNavMap = { home: 0, modeling: 1, services: 2, blogs: 3, gallery: 4 };
+            const pageNavMap = { home: 0, modeling: 1, services: 2, gallery: 3 };
             const navIndex = pageNavMap[pageId];
             if (navIndex !== undefined && navs[navIndex]) navs[navIndex].classList.add('active');
 
@@ -1873,19 +1651,30 @@
         }
 
         // WhatsApp Submission Handlers
+
+        // 1. Home Page Contact HQ Form -> WhatsApp Redirect
         document.getElementById('contactHqForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
             const name = document.getElementById('hqName').value;
             const email = document.getElementById('hqEmail').value;
             const service = document.getElementById('hqService').value;
             const messageText = document.getElementById('hqMessage').value;
 
-            const message = `Project Request via HQ Portal\nClient Name / Company : ${name}\nEmail : ${email}\nService Needed : ${service}\nProject Brief : ${messageText}`;
-            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            const message = `Project Request via HQ Portal
+Client Name / Company : ${name}
+Email : ${email}
+Service Needed : ${service}
+Project Brief : ${messageText}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
 
+        // 2. 3D Print Request Form -> WhatsApp Redirect
         document.getElementById('printForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
             const title = document.getElementById('modelTitle').value;
             const email = document.getElementById('clientEmail3D').value;
             const rawFilament = document.getElementById('filamentType').options[document.getElementById('filamentType').selectedIndex].text;
@@ -1895,38 +1684,70 @@
             const notes = document.getElementById('notes').value || "None";
             const estimate = document.getElementById('totalEstimate').innerText;
 
-            const message = `I want a 3d model printed\nModel name : ${title}\nEmail : ${email}\nFilament : ${filament}\nDensity : ${density}\nEstimated weight : ${weight} Gram\nSpecial Note : ${notes}\nEstimated Cost : ${estimate}`;
-            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            const message = `I want a 3d model printed
+Model name : ${title}
+Email : ${email}
+Filament : ${filament}
+Density : ${density}
+Estimated weight : ${weight} Gram
+Special Note : ${notes}
+Estimated Cost : ${estimate}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
 
+        // 3. IT Support Ticket -> WhatsApp Redirect
         document.getElementById('ticketForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
             const name = document.getElementById('ticketName').value;
             const email = document.getElementById('ticketEmail').value;
             const category = document.getElementById('ticketCategory').value;
             const details = document.getElementById('ticketDetails').value;
 
-            const message = `IT Support Ticket\nClient Name : ${name}\nEmail : ${email}\nCategory : ${category}\nDetails : ${details}`;
-            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            const message = `IT Support Ticket
+Client Name : ${name}
+Email : ${email}
+Category : ${category}
+Details : ${details}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         });
 
+        // 4. Modal Order Form -> WhatsApp Redirect
         document.getElementById('modalForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
             const email = document.getElementById('modalEmail').value;
             const dateTime = document.getElementById('modalDateTime').value;
 
-            const message = `Service Order Booking\nService : ${selectedServiceTitle}\nClient Email : ${email}\nPreferred Time : ${dateTime}`;
-            window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            const message = `Service Order Booking
+Service : ${selectedServiceTitle}
+Client Email : ${email}
+Preferred Time : ${dateTime}`;
+
+            const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
             closeOrderModal();
         });
 
-        // ===================== ADMIN & CORE ENGINE =====================
+        // ===================== GALLERY (ADMIN ONLY) =====================
 
-        const ADMIN_PASSCODE = 'mbz-admin-2026';
+        const ADMIN_PASSCODE = 'mbz-admin-2026'; // Change this to your secret passcode
         const GALLERY_KEY = 'mbzGalleryImages';
-        const BLOGS_KEY = 'mbzBlogPosts';
         let galleryDeleteMode = false;
         let lightboxIndex = 0;
+
+        function getGalleryImages() {
+            try { return JSON.parse(localStorage.getItem(GALLERY_KEY)) || []; }
+            catch (e) { return []; }
+        }
+
+        function saveGalleryImages(images) {
+            localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
+        }
 
         function isAdmin() {
             return sessionStorage.getItem('mbzAdminAuthed') === 'true';
@@ -1936,22 +1757,6 @@
             if (value) sessionStorage.setItem('mbzAdminAuthed', 'true');
             else sessionStorage.removeItem('mbzAdminAuthed');
             renderGallery();
-            renderBlogs();
-        }
-
-        function adminLogout() {
-            setAdminAuthed(false);
-            galleryDeleteMode = false;
-        }
-
-        /* GALLERY LOGIC */
-        function getGalleryImages() {
-            try { return JSON.parse(localStorage.getItem(GALLERY_KEY)) || []; }
-            catch (e) { return []; }
-        }
-
-        function saveGalleryImages(images) {
-            localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
         }
 
         function openAdminModal() {
@@ -1985,6 +1790,11 @@
             }
         });
 
+        function adminLogout() {
+            setAdminAuthed(false);
+            galleryDeleteMode = false;
+        }
+
         function toggleGalleryDeleteMode() {
             galleryDeleteMode = !galleryDeleteMode;
             const btn = document.getElementById('btnToggleDelete');
@@ -2009,7 +1819,7 @@
                 try {
                     saveGalleryImages(images);
                 } catch (err) {
-                    alert('Image is too large to store locally.');
+                    alert('Image is too large to store locally. Try a smaller image.');
                     return;
                 }
                 document.getElementById('galleryCaption').value = '';
@@ -2022,7 +1832,9 @@
 
         function deleteGalleryImage(index) {
             const images = getGalleryImages();
-            if (confirm(`Delete this image from the gallery?`)) {
+            const target = images[index];
+            const label = target && target.caption ? `"${target.caption}"` : 'this image';
+            if (confirm(`Delete ${label} from the gallery? This cannot be undone.`)) {
                 images.splice(index, 1);
                 saveGalleryImages(images);
                 renderGallery();
@@ -2061,6 +1873,7 @@
                     const del = document.createElement('button');
                     del.className = 'gallery-delete-btn';
                     del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+                    del.title = 'Delete image';
                     del.addEventListener('click', (e) => {
                         e.stopPropagation();
                         deleteGalleryImage(index);
@@ -2097,143 +1910,19 @@
             document.getElementById('galleryLightbox').style.display = 'none';
         }
 
-        /* BLOG MANAGEMENT LOGIC */
-        function getBlogPosts() {
-            try { return JSON.parse(localStorage.getItem(BLOGS_KEY)) || []; }
-            catch (e) { return []; }
-        }
-
-        function saveBlogPosts(posts) {
-            localStorage.setItem(BLOGS_KEY, JSON.stringify(posts));
-        }
-
-        function openBlogAdminModal() {
-            document.getElementById('blogAdminError').style.display = 'none';
-            if (isAdmin()) {
-                document.getElementById('blogAdminLoginStep').style.display = 'none';
-                document.getElementById('blogPublishStep').style.display = 'block';
-            } else {
-                document.getElementById('blogAdminLoginStep').style.display = 'block';
-                document.getElementById('blogPublishStep').style.display = 'none';
-                document.getElementById('blogAdminPasscode').value = '';
-            }
-            document.getElementById('blogAdminModal').style.display = 'flex';
-        }
-
-        function closeBlogAdminModal() {
-            document.getElementById('blogAdminModal').style.display = 'none';
-        }
-
-        document.getElementById('blogLoginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pass = document.getElementById('blogAdminPasscode').value;
-            const errorBox = document.getElementById('blogAdminError');
-            if (pass === ADMIN_PASSCODE) {
-                setAdminAuthed(true);
-                closeBlogAdminModal();
-                openBlogAdminModal();
-            } else {
-                errorBox.innerText = 'ACCESS DENIED: Invalid passcode.';
-                errorBox.style.display = 'block';
-            }
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('galleryLightbox');
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxStep(-1);
+            if (e.key === 'ArrowRight') lightboxStep(1);
         });
 
-        document.getElementById('blogPostForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const title = document.getElementById('blogTitle').value.trim();
-            const category = document.getElementById('blogCategory').value.trim();
-            const imageUrlInput = document.getElementById('blogImageUrl').value.trim();
-            const imageFileInput = document.getElementById('blogImageFile');
-            const link = document.getElementById('blogLink').value.trim();
-            const content = document.getElementById('blogContent').value.trim();
-
-            const createPostAndSave = (imageSrc) => {
-                const posts = getBlogPosts();
-                posts.unshift({
-                    id: Date.now(),
-                    title,
-                    category,
-                    image: imageSrc || 'https://via.placeholder.com/600x400/121216/FF0000?text=MBZ+TECH',
-                    link,
-                    content,
-                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-                });
-
-                try {
-                    saveBlogPosts(posts);
-                    closeBlogAdminModal();
-                    renderBlogs();
-                    switchPage('blogs');
-                    document.getElementById('blogPostForm').reset();
-                } catch (err) {
-                    alert('Data exceeds local storage memory limit. Try using an image URL instead of an uploaded file.');
-                }
-            };
-
-            if (imageFileInput.files && imageFileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (evt) {
-                    createPostAndSave(evt.target.result);
-                };
-                reader.readAsDataURL(imageFileInput.files[0]);
-            } else {
-                createPostAndSave(imageUrlInput);
-            }
+        document.getElementById('galleryLightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'galleryLightbox') closeLightbox();
         });
-
-        function deleteBlogPost(index) {
-            if (confirm('Are you sure you want to delete this blog post?')) {
-                const posts = getBlogPosts();
-                posts.splice(index, 1);
-                saveBlogPosts(posts);
-                renderBlogs();
-            }
-        }
-
-        function renderBlogs() {
-            const grid = document.getElementById('blogsGrid');
-            const empty = document.getElementById('blogsEmpty');
-            const adminBar = document.getElementById('blogAdminBar');
-            const posts = getBlogPosts();
-            const admin = isAdmin();
-
-            adminBar.style.display = admin ? 'flex' : 'none';
-            empty.style.display = posts.length === 0 ? 'block' : 'none';
-            grid.innerHTML = '';
-
-            posts.forEach((post, index) => {
-                const card = document.createElement('div');
-                card.className = 'blog-card';
-
-                let deleteBtn = '';
-                if (admin) {
-                    deleteBtn = `<button class="blog-delete-btn" onclick="deleteBlogPost(${index})" title="Delete Post"><i class="fa-solid fa-trash-can"></i></button>`;
-                }
-
-                let linkMarkup = '';
-                if (post.link) {
-                    linkMarkup = `<a href="${post.link}" target="_blank" class="blog-link">Read Full Link <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`;
-                }
-
-                card.innerHTML = `
-                    ${deleteBtn}
-                    <img src="${post.image}" class="blog-img" alt="${post.title}" onerror="this.src='https://via.placeholder.com/600x400/121216/FF0000?text=MBZ+TECH'">
-                    <div class="blog-body">
-                        <div class="blog-meta">
-                            <span class="blog-tag">${post.category}</span>
-                            <span>${post.date}</span>
-                        </div>
-                        <h3 class="blog-title">${post.title}</h3>
-                        <div class="blog-content">${post.content}</div>
-                        ${linkMarkup}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
 
         renderGallery();
-        renderBlogs();
     </script>
 </body>
 </html>
